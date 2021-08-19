@@ -10,7 +10,7 @@ contract Token is ERC20Detailed, ERC20Mintable {
     uint256 public MINTED_AMOUNT = 5 ether;
     
     constructor(string memory _name, string memory _symbol) ERC20Detailed(_name, _symbol, 18) public {
-        _mint(msg.sender, 1000000000000000000000000);
+        _mint(msg.sender, 10000 * 1**18);
     }
     
     function mintTokens() public {
