@@ -1,14 +1,15 @@
-import { ChainId, JSBI, Percent, Token, WDEV } from 'moonbeamswap'
+import { ChainId, JSBI, Percent, Token, WDEV } from 'seadexswap'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { routerv2 } from '../moonbase_address.json'
 
-import { injected } from '../connectors'
+import { injected, walletconnect, walletlink } from '../connectors'
 //fortmatic, portis, walletconnect, walletlink, lattice
 export const ROUTER_ADDRESS: { [key: string]: string } = {
   [ChainId.STANDALONE]: '0x42e2EE7Ba8975c473157634Ac2AF4098190fc741',
   [ChainId.MOONROCK]: routerv2,
   [ChainId.MOONBASE]: routerv2,
   [ChainId.MOONSHADOW]: routerv2,
+  [ChainId.MOONRIVER]: routerv2,
 }
 
 // a list of tokens by chain
@@ -41,6 +42,7 @@ export const ALPHA = new Token(ChainId.MAINNET, '0xa1faa113cbE53436Df28FF0aEe542
 
 const WDEV_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WDEV[ChainId.MAINNET]],
+  [ChainId.MOONRIVER]: [WDEV[ChainId.MOONRIVER]],
   [ChainId.STANDALONE]: [WDEV[ChainId.STANDALONE]],
   [ChainId.MOONROCK]: [WDEV[ChainId.MOONROCK]],
   [ChainId.MOONBASE]: [WDEV[ChainId.MOONBASE]],
@@ -129,7 +131,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Easy-to-use browser extension.',
     href: null,
     color: '#E8831D',
-  } /*,
+  } ,
   WALLET_CONNECT: {
     connector: walletconnect,
     name: 'WalletConnect',
@@ -138,7 +140,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#4196FC',
     mobile: true
-  },
+  },/*
   LATTICE: {
     connector: lattice,
     name: 'Lattice',
@@ -147,7 +149,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#40a9ff',
     mobile: true
-  },
+  },*/
   WALLET_LINK: {
     connector: walletlink,
     name: 'Coinbase Wallet',
@@ -155,7 +157,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Use Coinbase Wallet app on mobile device',
     href: null,
     color: '#315CF5'
-  },
+  }/*,
   COINBASE_LINK: {
     name: 'Open in Coinbase Wallet',
     iconName: 'coinbaseWalletIcon.svg',

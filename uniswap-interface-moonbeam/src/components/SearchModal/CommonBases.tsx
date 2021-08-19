@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainId, Currency, currencyEquals, DEV, Token } from 'moonbeamswap'
+import { ChainId, Currency, currencyEquals, DEV, Token } from 'seadexswap'
 import styled from 'styled-components'
 
 import { SUGGESTED_BASES } from '../../constants'

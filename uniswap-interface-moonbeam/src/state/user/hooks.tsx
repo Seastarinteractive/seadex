@@ -1,4 +1,4 @@
-import { ChainId, Pair, Token } from 'moonbeamswap'
+import { ChainId, Pair, Token } from 'seadexswap'
 import flatMap from 'lodash.flatmap'
 import { useCallback, useMemo } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'

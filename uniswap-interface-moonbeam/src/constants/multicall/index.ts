@@ -1,4 +1,4 @@
-import { ChainId } from 'moonbeamswap'
+import { ChainId } from 'seadexswap'
 import MULTICALL_ABI from './abi.json'
 import { multicall } from '../../moonbase_address.json'
 
@@ -7,7 +7,8 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
   [ChainId.STANDALONE]: '0xF8cef78E923919054037a1D03662bBD884fF4edf',
   [ChainId.MOONROCK]: multicall,
   [ChainId.MOONBASE]: multicall,
-  [ChainId.MOONSHADOW]: multicall
+  [ChainId.MOONSHADOW]: multicall,
+  [ChainId.MOONRIVER]: multicall
 }
 
 export { MULTICALL_ABI, MULTICALL_NETWORKS }

@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, DEV, WDEV } from 'moonbeamswap'
+import { Currency, currencyEquals, DEV, WDEV } from 'seadexswap'
 import { useMemo } from 'react'
 import { tryParseAmount } from '../state/swap/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
