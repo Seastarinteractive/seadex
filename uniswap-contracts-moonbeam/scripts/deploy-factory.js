@@ -6,36 +6,43 @@ async function deploy() {
    deployerAddress = account.address;
    console.log(`Deploying contracts using ${deployerAddress}`);
 
-   //Deploy WETH
+   // Deploy WETH
    const weth = await ethers.getContractFactory('WETH');
    const wethInstance = await weth.deploy();
    await wethInstance.deployed();
 
-   console.log(`WETH deployed to : ${wethInstance.address}`);
+   console.log(`Wrapped native token deployed to : ${wethInstance.address}`);
 
-   //Deploy Factory
+   // Deploy Factory
    const factory = await ethers.getContractFactory('UniswapV2Factory');
    const factoryInstance = await factory.deploy(deployerAddress);
    await factoryInstance.deployed();
 
    console.log(`Factory deployed to : ${factoryInstance.address}`);
 
-   //Deploy Router passing Factory Address and WETH Address
-   const router = await ethers.getContractFactory('UniswapV2Router02');
-   const routerInstance = await router.deploy(
-      factoryInstance.address,
-      wethInstance.address
-   );
-   await routerInstance.deployed();
+   //Init code
+   const calHash = await ethers.getContractFactory('CalHash');
+   const calHashInstance = await calHash.deploy();
+   await calHashInstance.deployed();
 
-   console.log(`Router V02 deployed to :  ${routerInstance.address}`);
+   console.log(`CalHash deployed to : ${calHashInstance.address}`);
 
-   //Deploy Multicall (needed for Interface)
-   const multicall = await ethers.getContractFactory('Multicall');
-   const multicallInstance = await multicall.deploy();
-   await multicallInstance.deployed();
+   let initCode = await calHashInstance.getInitHash();
+   console.log(`INIT_CODE_HASH: ${initCode}.\nUse this in periphery/libraries/UniswapV2Library.sol before migrating routers`);
+   
+   // //Deploy Router passing Factory Address and WETH Address
+   // const router = await ethers.getContractFactory('UniswapV2Router02');
+   // const routerInstance = await router.deploy(factoryAddress, wethAddress);
+   // await routerInstance.deployed();
 
-   console.log(`Multicall deployed to : ${multicallInstance.address}`);
+   // console.log(`Router V02 deployed to :  ${routerInstance.address}`);
+
+   // //Deploy Multicall (needed for Interface)
+   // const multicall = await ethers.getContractFactory('Multicall');
+   // const multicallInstance = await multicall.deploy();
+   // await multicallInstance.deployed();
+
+   // console.log(`Multicall deployed to : ${multicallInstance.address}`);
 }
 
 deploy()
