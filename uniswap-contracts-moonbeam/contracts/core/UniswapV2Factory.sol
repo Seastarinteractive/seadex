@@ -2,15 +2,20 @@ pragma solidity =0.5.16;
 
 import './interfaces/IUniswapV2Factory.sol';
 import './UniswapV2Pair.sol';
+import './Ownable.sol';
 
-contract UniswapV2Factory is IUniswapV2Factory {
+contract UniswapV2Factory is IUniswapV2Factory, Ownable {
     address public feeTo;
     address public feeToSetter;
 
     mapping(address => mapping(address => address)) public getPair;
     address[] public allPairs;
 
+    /// @notice Tokens that are supported by Dex
+    mapping(address => bool) public supportedToken;
+
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
+    event TokenSupported(address indexed token);
 
     constructor(address _feeToSetter) public {
         feeToSetter = _feeToSetter;
@@ -24,6 +29,10 @@ contract UniswapV2Factory is IUniswapV2Factory {
         require(tokenA != tokenB, 'UniswapV2: IDENTICAL_ADDRESSES');
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
         require(token0 != address(0), 'UniswapV2: ZERO_ADDRESS');
+        
+        require(supportedToken[token0], "UniswapV2: NOT_SUPPORTED_0");
+        require(supportedToken[token1], "UniswapV2: NOT_SUPPORTED_1");
+
         require(getPair[token0][token1] == address(0), 'UniswapV2: PAIR_EXISTS'); // single check is sufficient
         bytes memory bytecode = type(UniswapV2Pair).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
@@ -45,5 +54,18 @@ contract UniswapV2Factory is IUniswapV2Factory {
     function setFeeToSetter(address _feeToSetter) external {
         require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         feeToSetter = _feeToSetter;
+    }
+
+    /////////////////////////////////////////////////////////////////////////
+    //
+    // Add supported tokens
+    //
+    /////////////////////////////////////////////////////////////////////////
+
+    function addSupportedToken(address token) external onlyOwner {
+        require(token != address(0), "UniswapV2: ZERO_ADDRESS");
+        require(supportedToken[token] == false, "UniswapV2: ADDED");
+
+        supportedToken[token] = true;
     }
 }
