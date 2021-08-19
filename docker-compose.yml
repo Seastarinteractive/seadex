@@ -1,0 +1,60 @@
+version: "3.2"
+
+services:
+  seadex-contracts:
+    build:
+      context: ./uniswap-contracts-moonbeam
+    container_name: "seadex-contracts"
+    volumes:
+      - type: bind
+        source: ./uniswap-contracts-moonbeam
+        target: /home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - net
+    entrypoint: sh
+    command: '-c "sleep 1d"'
+    #links:
+    #  - local-node
+    env_file:
+     - ./.env
+    ports:
+      - "3000:3000"
+  seadex-interface:
+    build:
+      context: ./uniswap-interface-moonbeam
+    container_name: "seadex-interface"
+    volumes:
+      - type: bind
+        source: ./uniswap-interface-moonbeam
+        target: /home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - net
+    entrypoint: sh
+    command: '-c "sleep 1d"'
+    #links:
+    #  - local-node
+    #env_file:
+    #  - ./.env
+    ports:
+      - "3001:3000"
+  seadex-sdk:
+    build:
+      context: ./uniswap-sdk-moonbeam
+    container_name: "seadex-sdk"
+    volumes:
+      - type: bind
+        source: ./uniswap-sdk-moonbeam
+        target: /home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - net
+    entrypoint: sh
+    command: '-c "sleep 1d"'
+    #links:
+    #  - local-node
+    env_file:
+     - ./.env
+networks:
+  net:
