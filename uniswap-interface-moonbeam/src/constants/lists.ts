@@ -1,6 +1,5 @@
 // the DCTDEX Default token list lives here
-export const DEFAULT_TOKEN_LIST_URL =
-  'https://raw.githubusercontent.com/PureStake/moonbeam-uniswap/main/uniswap-interface-moonbeam/src/tokens.json'
+export const DEFAULT_TOKEN_LIST_URL = 'https://cdn.seascape.network/seadex/seadex.tokenlist.json'
 
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   DEFAULT_TOKEN_LIST_URL
