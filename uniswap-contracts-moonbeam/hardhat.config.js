@@ -19,6 +19,7 @@ module.exports = {
 
       moonbase: {
          url: 'https://rpc.testnet.moonbeam.network',
+         // url: 'https://moonbeam-alpha.api.onfinality.io/public',
          accounts: [privateKey],
          chainId: 1287,
       },
