@@ -1,5 +1,5 @@
 import JSBI from 'jsbi'
-import { factory } from './moonbase_address.json'
+import { factory, init_code_hash } from './moonbase_address.json'
 
 // exports for external consumption
 export type BigintIsh = JSBI | bigint | string
@@ -7,6 +7,7 @@ export type BigintIsh = JSBI | bigint | string
 export enum ChainId {
   MAINNET = 1,
   STANDALONE = 1281,
+  MOONRIVER = 1285,
   MOONROCK = 1286,
   MOONBASE = 1287,
   MOONSHADOW = 1288
@@ -27,10 +28,11 @@ export const FACTORY_ADDRESS: { [key: string]: string } = {
   [ChainId.STANDALONE]: '0x5c4242beB94dE30b922f57241f1D02f36e906915',
   [ChainId.MOONROCK]: factory,
   [ChainId.MOONBASE]: factory,
-  [ChainId.MOONSHADOW]: factory
+  [ChainId.MOONSHADOW]: factory,
+  [ChainId.MOONRIVER]: factory
 }
 
-export const INIT_CODE_HASH = '0x01429e880a7972ebfbba904a5bbe32a816e78273e4b38ffa6bdeaebce8adba7c'
+export const INIT_CODE_HASH = init_code_hash;
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)
 
