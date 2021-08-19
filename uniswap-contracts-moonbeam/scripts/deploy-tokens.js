@@ -8,12 +8,12 @@ async function deploy() {
 
    // Deploy WETH
    const token = await ethers.getContractFactory('Token');
-   const mdt = await token.deploy("MEDET", "MDT");
+   const mdt = await token.deploy("MEDET", "MEDET");
    await mdt.deployed();
 
    console.log(`MEDET token deployed to : ${mdt.address}`);
 
-   const bl = await token.deploy("BLOCKLORDS ERC20", "BL20");
+   const bl = await token.deploy("BLOCKLORDS ERC20", "BLOCKLORD");
    await bl.deployed();
 
    console.log(`Blocklords ERC-20 token deployed to : ${bl.address}`);
