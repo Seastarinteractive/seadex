@@ -133,7 +133,7 @@ export default function Header() {
         <HeaderElement>
           <Title href=".">
             <UniIcon>
-              <img style={{ height: 50 }} src={Logo} alt="logo" />
+              <img style={{ height: 70 }} src={Logo} alt="logo" />
             </UniIcon>
           </Title>
         </HeaderElement>
