@@ -20,12 +20,13 @@ const InputRow = styled.div<{ selected: boolean }>`
   padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
 `
 
-const CurrencySelect = styled.button<{ selected: boolean }>`
+const CurrencySelect = styled.button<{ selected: boolean, alt?: boolean }>`
   align-items: center;
   height: 2.2rem;
   font-size: 20px;
   font-weight: 500;
-  background-color: ${({ selected, theme }) => (selected ? theme.bg1 : theme.primary1)};
+  //background-color: ${({ selected, theme }) => (selected ? theme.bg1 : theme.primary1)};
+  background: ${({ alt }) => (alt ? 'linear-gradient(-45deg, #CE8FDA, #FA9BA2)' : 'linear-gradient(45deg, #37366C, #2A1E43)')};
   color: ${({ selected, theme }) => (selected ? theme.text1 : theme.white)};
   border-radius: 12px;
   box-shadow: ${({ selected }) => (selected ? 'none' : '0px 6px 10px rgba(0, 0, 0, 0.075)')};
@@ -75,6 +76,7 @@ const InputPanel = styled.div<{ hideInput?: boolean }>`
   position: relative;
   border-radius: ${({ hideInput }) => (hideInput ? '8px' : '20px')};
   background-color: ${({ theme }) => theme.bg2};
+  border: 1px solid #504F84;
   z-index: 1;
 `
 
@@ -129,6 +131,7 @@ interface CurrencyInputPanelProps {
   otherCurrency?: Currency | null
   id: string
   showCommonBases?: boolean
+  alt?: boolean
 }
 
 export default function CurrencyInputPanel({
@@ -145,7 +148,8 @@ export default function CurrencyInputPanel({
   hideInput = false,
   otherCurrency,
   id,
-  showCommonBases
+  showCommonBases,
+  alt
 }: CurrencyInputPanelProps) {
   const { t } = useTranslation()
 
@@ -208,6 +212,7 @@ export default function CurrencyInputPanel({
                 setModalOpen(true)
               }
             }}
+            alt={alt}
           >
             <Aligner>
               {pair ? (

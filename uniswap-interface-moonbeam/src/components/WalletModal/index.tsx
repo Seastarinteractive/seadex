@@ -63,6 +63,8 @@ const ContentWrapper = styled.div`
 
 const UpperSection = styled.div`
   position: relative;
+  background-color: #28275E;
+
 
   h5 {
     margin: 0;

@@ -315,6 +315,7 @@ export default function Swap() {
               onCurrencySelect={handleOutputSelect}
               otherCurrency={currencies[Field.INPUT]}
               id="swap-currency-output"
+              alt
             />
 
             {recipient !== null && !showWrap ? (

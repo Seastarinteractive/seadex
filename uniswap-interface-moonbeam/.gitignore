@@ -6,9 +6,13 @@ node_modules
 # testing
 coverage
 
+# development
+public
+src
+
 # production
-build
 .env.production
+.env
 
 # misc
 yarn.lock
