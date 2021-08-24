@@ -10,7 +10,6 @@ import styled, {
 //import { useIsDarkMode } from '../state/user/hooks'
 import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
-import BackgroundImage from '../assets/images/background-min.png'
 
 export * from './components'
 
@@ -207,8 +206,10 @@ html {
 //background-color: ${({ theme }) => theme.bg2};
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
+  height: 100%;
+  width: 100%;
   color: ${({ theme }) => theme.text1};
-  background: url(${BackgroundImage})
+  background: linear-gradient(45deg, #FA8E48, #D76D77, #3A1C71);
 }
 
 
