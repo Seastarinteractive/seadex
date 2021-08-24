@@ -18,7 +18,7 @@ import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === DEV ? 'DEV' : ''
+  return currency instanceof Token ? currency.address : currency === DEV ? 'MOVR' : ''
 }
 
 const StyledBalanceText = styled(Text)`
