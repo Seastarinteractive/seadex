@@ -8,7 +8,6 @@ coverage
 
 # development
 public
-src
 
 # production
 .env.production
