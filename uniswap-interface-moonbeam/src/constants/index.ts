@@ -1,6 +1,7 @@
 import { ChainId, JSBI, Percent, Token, WDEV } from 'seadexswap'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { routerv2 } from '../moonbase_address.json'
+import { routerv2 as riverRouterV2 } from '../moonriver_address.json'
 
 import { injected, walletconnect, walletlink } from '../connectors'
 //fortmatic, portis, walletconnect, walletlink, lattice
@@ -9,7 +10,7 @@ export const ROUTER_ADDRESS: { [key: string]: string } = {
   [ChainId.MOONROCK]: routerv2,
   [ChainId.MOONBASE]: routerv2,
   [ChainId.MOONSHADOW]: routerv2,
-  [ChainId.MOONRIVER]: routerv2,
+  [ChainId.MOONRIVER]: riverRouterV2,
 }
 
 // a list of tokens by chain

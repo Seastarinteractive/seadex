@@ -18,7 +18,7 @@ If you use the [following repository](https://github.com/albertov19/uniswap-cont
 
 ## Moonbase Alpha Addresses
 
-To make the interface work with your Moonbase Alpha deployment, you need to modify the `./src/moonbase_address.json`. Also make sure that you modify the addresses in the SDK repo.
+To make the interface work with your Moonbase Alpha deployment, you need to modify the `./src/moonbase_address.json` and `./src/moonriver_address.json`. Also make sure that you modify the addresses in the SDK repo.
 
 On Moonbase Alpha, these are the following addresses:
 
