@@ -23,6 +23,11 @@ module.exports = {
          accounts: [privateKey],
          chainId: 1287,
       },
+      moonriver: {
+         url: 'https://rpc.moonriver.moonbeam.network',
+         accounts: [privateKey],
+         chainId: 1285,
+      },
       dev: {
          url: 'http://127.0.0.1:9933',
          accounts: [privateKeyDev],
