@@ -1,4 +1,4 @@
-This is the Seadex, a fork of Uniswap on Moonriver (a kusama sidechain). Visit to try: https://seascape.finance.
+This is Seadex, a fork of Uniswap on Moonriver (a kusama sidechain). Visit to try: https://seascape.finance.
 
 This interface supports Testnets of all moonbeam + moonriver chain support.
 
