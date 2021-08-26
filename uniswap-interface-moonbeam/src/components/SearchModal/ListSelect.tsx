@@ -374,6 +374,13 @@ export function ListSelect({ onDismiss, onBack }: { onDismiss: () => void; onBac
           <ListRow key={listUrl} listUrl={listUrl} onBack={onBack} />
         ))}
       </ListContainer>
+
+      <Separator />
+
+      <div style={{ width: '100%' }}>
+        <p style={{ textAlign: 'center' }}>Contact listing@seascape.network to join the SeaDex</p>
+      </div>
+
       <Separator />
 
       <div style={{ padding: '16px', textAlign: 'center' }}>
