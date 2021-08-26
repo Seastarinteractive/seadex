@@ -2,7 +2,7 @@ import invariant from 'tiny-invariant'
 
 import { ChainId, ONE, TradeType, ZERO } from '../constants'
 import { sortedInsert } from '../utils'
-import { Currency, DEV } from './currency'
+import { Currency, MOVR } from './currency'
 import { CurrencyAmount } from './fractions/currencyAmount'
 import { Fraction } from './fractions/fraction'
 import { Percent } from './fractions/percent'
@@ -10,7 +10,7 @@ import { Price } from './fractions/price'
 import { TokenAmount } from './fractions/tokenAmount'
 import { Pair } from './pair'
 import { Route } from './route'
-import { currencyEquals, Token, WDEV } from './token'
+import { currencyEquals, Token, WMOVR } from './token'
 
 /**
  * Returns the percent difference between the mid price and the execution price, i.e. price impact.
@@ -84,18 +84,18 @@ export interface BestTradeOptions {
 
 /**
  * Given a currency amount and a chain ID, returns the equivalent representation as the token amount.
- * In other words, if the currency is DEV, returns the WDEV token amount for the given chain. Otherwise, returns
+ * In other words, if the currency is MOVR, returns the WMOVR token amount for the given chain. Otherwise, returns
  * the input currency amount.
  */
 function wrappedAmount(currencyAmount: CurrencyAmount, chainId: ChainId): TokenAmount {
   if (currencyAmount instanceof TokenAmount) return currencyAmount
-  if (currencyAmount.currency === DEV) return new TokenAmount(WDEV[chainId], currencyAmount.raw)
+  if (currencyAmount.currency === MOVR) return new TokenAmount(WMOVR[chainId], currencyAmount.raw)
   invariant(false, 'CURRENCY')
 }
 
 function wrappedCurrency(currency: Currency, chainId: ChainId): Token {
   if (currency instanceof Token) return currency
-  if (currency === DEV) return WDEV[chainId]
+  if (currency === MOVR) return WMOVR[chainId]
   invariant(false, 'CURRENCY')
 }
 
@@ -179,13 +179,13 @@ export class Trade {
     this.inputAmount =
       tradeType === TradeType.EXACT_INPUT
         ? amount
-        : route.input === DEV
+        : route.input === MOVR
         ? CurrencyAmount.ether(amounts[0].raw)
         : amounts[0]
     this.outputAmount =
       tradeType === TradeType.EXACT_OUTPUT
         ? amount
-        : route.output === DEV
+        : route.output === MOVR
         ? CurrencyAmount.ether(amounts[amounts.length - 1].raw)
         : amounts[amounts.length - 1]
     this.executionPrice = new Price(
