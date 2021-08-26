@@ -1,4 +1,4 @@
-import { Currency, DEV, Token } from 'seadexswap'
+import { Currency, MOVR, Token } from 'seadexswap'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -34,7 +34,7 @@ export default function CurrencyLogo({
   const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
 
   const srcs: string[] = useMemo(() => {
-    if (currency === DEV) return []
+    if (currency === MOVR) return []
 
     if (currency instanceof Token) {
       if (currency instanceof WrappedTokenInfo) {
@@ -46,7 +46,7 @@ export default function CurrencyLogo({
     return []
   }, [currency, uriLocations])
 
-  if (currency === DEV) {
+  if (currency === MOVR) {
     return <StyledMoonbeamLogo src={MoonbeamLogo} size={size} style={style} />
   }
 

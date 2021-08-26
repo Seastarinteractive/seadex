@@ -1,5 +1,5 @@
 import { parseBytes32String } from '@ethersproject/strings'
-import { Currency, DEV, Token, currencyEquals } from 'seadexswap'
+import { Currency, MOVR, Token, currencyEquals } from 'seadexswap'
 import { useMemo } from 'react'
 import { useSelectedTokenList } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
@@ -104,5 +104,5 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const isETH = currencyId?.toUpperCase() === 'MOVR' || currencyId?.toUpperCase() === 'MOVR'
   const token = useToken(isETH ? undefined : currencyId)
-  return isETH ? DEV : token
+  return isETH ? MOVR : token
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainId, Currency, currencyEquals, DEV, Token } from 'seadexswap'
+import { ChainId, Currency, currencyEquals, MOVR, Token } from 'seadexswap'
 import styled from 'styled-components'
 
 import { SUGGESTED_BASES } from '../../constants'
@@ -45,13 +45,13 @@ export default function CommonBases({
       <AutoRow gap="4px">
         <BaseWrapper
           onClick={() => {
-            if (!selectedCurrency || !currencyEquals(selectedCurrency, DEV)) {
-              onSelect(DEV)
+            if (!selectedCurrency || !currencyEquals(selectedCurrency, MOVR)) {
+              onSelect(MOVR)
             }
           }}
-          disable={selectedCurrency === DEV}
+          disable={selectedCurrency === MOVR}
         >
-          <CurrencyLogo currency={DEV} style={{ marginRight: 8 }} />
+          <CurrencyLogo currency={MOVR} style={{ marginRight: 8 }} />
           <Text fontWeight={500} fontSize={16}>
             MOVR 
           </Text>

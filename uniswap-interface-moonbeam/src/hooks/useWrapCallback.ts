@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, DEV, WDEV } from 'seadexswap'
+import { Currency, currencyEquals, MOVR, WMOVR } from 'seadexswap'
 import { useMemo } from 'react'
 import { tryParseAmount } from '../state/swap/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
@@ -36,7 +36,7 @@ export default function useWrapCallback(
 
     const sufficientBalance = inputAmount && balance && !balance.lessThan(inputAmount)
 
-    if (inputCurrency === DEV && currencyEquals(WDEV[chainId], outputCurrency)) {
+    if (inputCurrency === MOVR && currencyEquals(WMOVR[chainId], outputCurrency)) {
       return {
         wrapType: WrapType.WRAP,
         execute:
@@ -52,7 +52,7 @@ export default function useWrapCallback(
             : undefined,
         inputError: sufficientBalance ? undefined : 'Insufficient MOVR balance'
       }
-    } else if (currencyEquals(WDEV[chainId], inputCurrency) && outputCurrency === DEV) {
+    } else if (currencyEquals(WMOVR[chainId], inputCurrency) && outputCurrency === MOVR) {
       return {
         wrapType: WrapType.UNWRAP,
         execute:

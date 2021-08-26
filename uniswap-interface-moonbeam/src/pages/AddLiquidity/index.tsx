@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, DEV, TokenAmount, WDEV } from 'seadexswap'
+import { Currency, currencyEquals, MOVR, TokenAmount, WMOVR } from 'seadexswap'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -52,8 +52,8 @@ export default function AddLiquidity({
 
   const oneCurrencyIsWDEV = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(currencyA, WDEV[chainId])) ||
-        (currencyB && currencyEquals(currencyB, WDEV[chainId])))
+      ((currencyA && currencyEquals(currencyA, WMOVR[chainId])) ||
+        (currencyB && currencyEquals(currencyB, WMOVR[chainId])))
   )
 
   const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
@@ -147,15 +147,15 @@ export default function AddLiquidity({
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null
-    if (currencyA === DEV || currencyB === DEV) {
-      const tokenBIsETH = currencyB === DEV
+    if (currencyA === MOVR || currencyB === MOVR) {
+      const tokenBIsETH = currencyB === MOVR
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
       args = [
         wrappedCurrency(tokenBIsETH ? currencyA : currencyB, chainId)?.address ?? '', // token
         (tokenBIsETH ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
         amountsMin[tokenBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
-        amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // DEV min
+        amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // MOVR min
         account,
         deadlineFromNow
       ]

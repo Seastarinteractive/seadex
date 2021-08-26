@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, DEV, JSBI, Token, TokenAmount } from 'seadexswap'
+import { Currency, CurrencyAmount, MOVR, JSBI, Token, TokenAmount } from 'seadexswap'
 import { useMemo } from 'react'
 import ERC20_INTERFACE from '../../constants/abis/erc20'
 import { useAllTokens } from '../../hooks/Tokens'
@@ -8,7 +8,7 @@ import { isAddress } from '../../utils'
 import { useSingleContractMultipleData, useMultipleContractSingleData } from '../multicall/hooks'
 
 /**
- * Returns a map of the given addresses to their eventually consistent DEV balances.
+ * Returns a map of the given addresses to their eventually consistent MOVR balances.
  */
 export function useETHBalances(
   uncheckedAddresses?: (string | undefined)[]
@@ -103,7 +103,7 @@ export function useCurrencyBalances(
   ])
 
   const tokenBalances = useTokenBalances(account, tokens)
-  const containsETH: boolean = useMemo(() => currencies?.some(currency => currency === DEV) ?? false, [currencies])
+  const containsETH: boolean = useMemo(() => currencies?.some(currency => currency === MOVR) ?? false, [currencies])
   const ethBalance = useETHBalances(containsETH ? [account] : [])
 
   return useMemo(
@@ -113,7 +113,7 @@ export function useCurrencyBalances(
         if (currency instanceof Token) {
           return tokenBalances[currency.address]
         }
-        if (currency === DEV) return ethBalance[account]
+        if (currency === MOVR) return ethBalance[account]
         return undefined
       }) ?? [],
     [account, currencies, ethBalance, tokenBalances]

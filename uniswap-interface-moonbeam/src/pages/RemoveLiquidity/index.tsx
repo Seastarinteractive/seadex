@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, DEV, Percent, WDEV } from 'seadexswap'
+import { Currency, currencyEquals, MOVR, Percent, WMOVR } from 'seadexswap'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -205,8 +205,8 @@ export default function RemoveLiquidity({
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    const currencyBIsETH = currencyB === DEV
-    const oneCurrencyIsETH = currencyA === DEV || currencyBIsETH
+    const currencyBIsETH = currencyB === MOVR
+    const oneCurrencyIsETH = currencyA === MOVR || currencyBIsETH
     const deadlineFromNow = Math.ceil(Date.now() / 1000) + deadline
 
     if (!tokenA || !tokenB) throw new Error('could not wrap')
@@ -426,11 +426,11 @@ export default function RemoveLiquidity({
     [onUserInput]
   )
 
-  const oneCurrencyIsETH = currencyA === DEV || currencyB === DEV
+  const oneCurrencyIsETH = currencyA === MOVR || currencyB === MOVR
   const oneCurrencyIsWDEV = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(WDEV[chainId], currencyA)) ||
-        (currencyB && currencyEquals(WDEV[chainId], currencyB)))
+      ((currencyA && currencyEquals(WMOVR[chainId], currencyA)) ||
+        (currencyB && currencyEquals(WMOVR[chainId], currencyB)))
   )
 
   const handleSelectCurrencyA = useCallback(
@@ -562,8 +562,8 @@ export default function RemoveLiquidity({
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA === DEV ? WDEV[chainId].address : currencyIdA}/${
-                              currencyB === DEV ? WDEV[chainId].address : currencyIdB
+                            to={`/remove/${currencyA === MOVR ? WMOVR[chainId].address : currencyIdA}/${
+                              currencyB === MOVR ? WMOVR[chainId].address : currencyIdB
                             }`}
                           >
                             Receive WMOVR
@@ -571,8 +571,8 @@ export default function RemoveLiquidity({
                         ) : oneCurrencyIsWDEV ? (
                           <StyledInternalLink
                             to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WDEV[chainId]) ? 'MOVR' : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WDEV[chainId]) ? 'MOVR' : currencyIdB}`}
+                              currencyA && currencyEquals(currencyA, WMOVR[chainId]) ? 'MOVR' : currencyIdA
+                            }/${currencyB && currencyEquals(currencyB, WMOVR[chainId]) ? 'MOVR' : currencyIdB}`}
                           >
                             Receive MOVR
                           </StyledInternalLink>

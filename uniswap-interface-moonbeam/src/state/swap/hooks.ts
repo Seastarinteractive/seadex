@@ -1,6 +1,6 @@
 import useENS from '../../hooks/useENS'
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, DEV, JSBI, Token, TokenAmount, Trade } from 'seadexswap'
+import { Currency, CurrencyAmount, MOVR, JSBI, Token, TokenAmount, Trade } from 'seadexswap'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,7 +35,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === DEV ? 'MOVR' : ''
+          currencyId: currency instanceof Token ? currency.address : currency === MOVR ? 'MOVR' : ''
         })
       )
     },

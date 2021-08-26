@@ -1,4 +1,4 @@
-import { Currency, DEV, Token } from 'seadexswap'
+import { Currency, MOVR, Token } from 'seadexswap'
 import React, { KeyboardEvent, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import ReactGA from 'react-ga'
 import { useTranslation } from 'react-i18next'
@@ -121,7 +121,7 @@ export function CurrencySearch({
       if (e.key === 'Enter') {
         const s = searchQuery.toLowerCase().trim()
         if (s === 'dev') {
-          handleCurrencySelect(DEV)
+          handleCurrencySelect(MOVR)
         } else if (filteredSortedTokens.length > 0) {
           if (
             filteredSortedTokens[0].symbol?.toLowerCase() === searchQuery.trim().toLowerCase() ||

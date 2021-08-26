@@ -5,28 +5,12 @@
   "timestamp": "2021-08-10T00:00:00+00:00",
   "tokens": [
     {
-      "address": "0xE3C7487Eb01C74b73B7184D198c7fBF46b34E5AF",
-      "chainId": 1285,
-      "name": "Wrapped Moonriver",
-      "symbol": "WMOVR",
-      "decimals": 18,
-      "logoURI": "https://cdn.seascape.network/currencies/glimmer.svg"
-    },
-    {
       "address": "0xbD90A6125a84E5C512129D622a75CDDE176aDE5E",
       "chainId": 1285,
       "name": "RiverBoat",
       "symbol": "RIB",
       "decimals": 18,
       "logoURI": "https://cdn.seascape.network/currencies/rib.png"
-    },
-    {
-      "address": "0xbd23fCD60bD2682dea6A3aad84b498c54d56c494",
-      "chainId": 1287,
-      "name": "Wrapped Moonriver",
-      "symbol": "WMOVR",
-      "decimals": 18,
-      "logoURI": "https://cdn.seascape.network/currencies/glimmer.svg"
     },
     {
       "address": "0x412898253E0dDc1af9D81740615BfefeF7b3BdAD",
@@ -55,7 +39,7 @@
   ],
   "version": {
     "major": 3,
-    "minor": 0,
+    "minor": 2,
     "patch": 1
   }
 }

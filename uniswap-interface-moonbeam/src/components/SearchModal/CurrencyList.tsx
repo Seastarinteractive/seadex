@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, DEV, Token } from 'seadexswap'
+import { Currency, CurrencyAmount, currencyEquals, MOVR, Token } from 'seadexswap'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -18,7 +18,7 @@ import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === DEV ? 'MOVR' : ''
+  return currency instanceof Token ? currency.address : currency === MOVR ? 'MOVR' : ''
 }
 
 const StyledBalanceText = styled(Text)`
@@ -171,7 +171,7 @@ export default function CurrencyList({
   fixedListRef?: MutableRefObject<FixedSizeList | undefined>
   showETH: boolean
 }) {
-  const itemData = useMemo(() => (showETH ? [Currency.DEV, ...currencies] : currencies), [currencies, showETH])
+  const itemData = useMemo(() => (showETH ? [Currency.MOVR, ...currencies] : currencies), [currencies, showETH])
 
   const Row = useCallback(
     ({ data, index, style }) => {

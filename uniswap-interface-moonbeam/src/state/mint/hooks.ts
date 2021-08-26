@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, DEV, JSBI, Pair, Percent, Price, TokenAmount } from 'seadexswap'
+import { Currency, CurrencyAmount, MOVR, JSBI, Pair, Percent, Price, TokenAmount } from 'seadexswap'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PairState, usePair } from '../../data/Reserves'
@@ -86,7 +86,7 @@ export function useDerivedMintInfo(
           dependentField === Field.CURRENCY_B
             ? pair.priceOf(tokenA).quote(wrappedIndependentAmount)
             : pair.priceOf(tokenB).quote(wrappedIndependentAmount)
-        return dependentCurrency === DEV ? CurrencyAmount.ether(dependentTokenAmount.raw) : dependentTokenAmount
+        return dependentCurrency === MOVR ? CurrencyAmount.ether(dependentTokenAmount.raw) : dependentTokenAmount
       }
       return undefined
     } else {
