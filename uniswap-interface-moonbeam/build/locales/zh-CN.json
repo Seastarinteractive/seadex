@@ -44,7 +44,7 @@
   "currentPoolSize": "当前资金池大小",
   "yourPoolShare": "你的资金池份额",
   "noZero": "金额不能为零。",
-  "mustBeETH": "输入中必须有一个是 ETH。",
+  "mustBeETH": "输入中必须有一个是 MOVR。",
   "enterCurrencyOrLabelCont": "输入 {{ inputCurrency }} 或 {{ label }} 值并继续。",
   "youAreAdding": "你将添加",
   "and": "和",

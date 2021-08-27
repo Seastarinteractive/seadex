@@ -44,7 +44,7 @@
   "currentPoolSize": "目前的資金池總量",
   "yourPoolShare": "你在資金池中的佔比",
   "noZero": "金額不能為零。",
-  "mustBeETH": "輸入中必須包含 ETH。",
+  "mustBeETH": "輸入中必須包含 MOVR",
   "enterCurrencyOrLabelCont": "輸入 {{ inputCurrency }} 或 {{ label }} 以繼續。",
   "youAreAdding": "你將把",
   "and": "和",
