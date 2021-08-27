@@ -2,7 +2,7 @@ import { Currency, DEV, Token } from 'seadexswap'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
-import MoonbeamLogo from '../../assets/images/glimmer.svg'
+import MoonbeamLogo from '../../assets/images/glimmer.png'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
