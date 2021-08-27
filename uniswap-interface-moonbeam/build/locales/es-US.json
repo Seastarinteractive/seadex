@@ -1,5 +1,5 @@
 {
-	"noWallet": "No se ha encontrado billetera de Ethereum",
+	"noWallet": "No se ha encontrado billetera",
 	"wrongNetwork": "Se encuentra en la red equivocada",
 	"switchNetwork": "Por favor cambie a {{ correctNetwork }}",
 	"installWeb3MobileBrowser": "Por favor ingrese desde un navegador móvil con web3 habilitado como Trust Wallet o Coinbase Wallet.",
@@ -44,7 +44,7 @@
 	"currentPoolSize": "Tamaño del Pool Actual",
 	"yourPoolShare": "Su parte del Pool",
 	"noZero": "El monto no puede ser cero.",
-	"mustBeETH": "Una de las entradas debe ser ETH.",
+	"mustBeETH": "Una de las entradas debe ser MOVR.",
 	"enterCurrencyOrLabelCont": "Ingrese un valor de {{ inputCurrency }} o de {{ label }} para continuar.",
 	"youAreAdding": "Está agregando entre",
 	"and": "y",

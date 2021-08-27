@@ -1,5 +1,5 @@
 {
-	"noWallet": "Không tìm thấy ví tiền Ethereum",
+	"noWallet": "không tìm thấy ví",
 	"wrongNetwork": "Kết nối mạng không đúng",
 	"switchNetwork": "Vui lòng chuyển sang {{ correctNetwork }}",
 	"installWeb3MobileBrowser": "Vui lòng truy cập từ trình duyệt di động hỗ trợ web3 như là Ví Trust hoặc Ví Coinbase",
@@ -52,7 +52,7 @@
 	"currentPoolSize": "Quy mô hiện tại của quỹ",
 	"yourPoolShare": "Phần hùn của bạn trong quỹ",
 	"noZero": "Số tiền không thể bằng không.",
-	"mustBeETH": "Một trong những đầu vào phải là ETH.",
+	"mustBeETH": "Một trong những đầu vào phải là MOVR.",
 	"enterCurrencyOrLabelCont": "Nhập giá trị {{ inputCurrency }} hoặc {{ label }} để tiếp tục.",
 	"youAreAdding": "Bạn đang thêm",
 	"and": "và",
