@@ -14,4 +14,5 @@ Have fun :)
 *The Seascape Network team!*
 
 Documentation: https://docs.seascape.network/seadex/intro
-List of addresses: https://docs.seascape.network/seadex/addresses
+
+List of deployed Seadex smartcontracts: https://docs.seascape.network/seadex/addresses
