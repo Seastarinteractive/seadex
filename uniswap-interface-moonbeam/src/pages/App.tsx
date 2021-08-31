@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react'
+import GlobalFonts from '../fonts/index';
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
@@ -18,6 +19,8 @@ import Swap from './Swap'
 import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
+
+import ProfitCircusIcon from '../../src/assets/images/profit_circus_icon.png'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -54,17 +57,67 @@ const Marginer = styled.div`
   margin-top: 5rem;
 `
 
+const ProfitCircusAD = styled.div`
+  position: absolute;
+  top: 150px;
+  right: 50px;
+  height: 150px;
+  width: 150px;
+  padding: 13px;
+  display: flex;
+  align-items: flex-end;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${ProfitCircusIcon});
+  cursor: pointer;
+
+  @media (max-width: 900px) {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+`
+
+const APY = styled.div`
+  font-family: 'Carnivalee Freakshow', sans-serif;
+  font-size: 30px;
+  color: #FA8E48;
+  position: relative;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 export default function App() {
+  const [apy, setAPY] = React.useState<any>();
+
+  const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials'
+  const profitCircusURL = 'https://moonriver.seascape.network/index/product/circus.html'
+
+  const getAPY = async () => {
+    const response = await fetch(apyURL)
+    const json = await response.json()
+    setAPY(Math.round(json.apy))
+  }
+
+  React.useEffect(() => {
+    getAPY()
+  }, [])
+
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={null} >
+      <GlobalFonts />
       <HashRouter>
         <Route component={GoogleAnalyticsReporter} />
         <Route component={DarkModeQueryParamReader} />
-        <AppWrapper>
+        <AppWrapper >
           <HeaderWrapper>
-            <Header />
+            <Header  />
           </HeaderWrapper>
-          <BodyWrapper>
+          <BodyWrapper >
             <Popups />
             <Web3ReactManager>
               <Switch>
@@ -82,6 +135,11 @@ export default function App() {
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
             </Web3ReactManager>
+            {!!apy &&
+              <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
+                <APY>{apy}% APR</APY>
+              </ProfitCircusAD>
+            }
             <Marginer />
           </BodyWrapper>
         </AppWrapper>
