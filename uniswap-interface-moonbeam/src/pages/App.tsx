@@ -70,6 +70,7 @@ const ProfitCircusAD = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(${ProfitCircusIcon});
+  cursor: pointer;
 
   @media (max-width: 900px) {
     position: relative;
@@ -93,8 +94,11 @@ const APY = styled.div`
 export default function App() {
   const [apy, setAPY] = React.useState<any>();
 
+  const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials'
+  const profitCircusURL = 'https://moonriver.seascape.network/index/product/circus.html'
+
   const getAPY = async () => {
-    const response = await fetch('https://moonriver-api.seascape.network/profit-circus/credentials')
+    const response = await fetch(apyURL)
     const json = await response.json()
     setAPY(Math.round(json.apy))
   }
@@ -132,7 +136,7 @@ export default function App() {
               </Switch>
             </Web3ReactManager>
             {!!apy &&
-              <ProfitCircusAD>
+              <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
                 <APY>{apy}% APR</APY>
               </ProfitCircusAD>
             }
