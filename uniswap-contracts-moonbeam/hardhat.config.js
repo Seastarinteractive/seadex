@@ -25,7 +25,7 @@ module.exports = {
       },
       moonriver: {
          url: 'https://rpc.moonriver.moonbeam.network',
-         accounts: [privateKey],
+         accounts: [process.env.PRIVKEY_MOONRIVER],
          chainId: 1285,
       },
       dev: {
