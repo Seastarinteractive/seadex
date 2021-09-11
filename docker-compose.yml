@@ -17,7 +17,7 @@ services:
     #links:
     #  - local-node
     env_file:
-     - ./.env
+      - ./.env
     ports:
       - "3000:3000"
   seadex-interface:
