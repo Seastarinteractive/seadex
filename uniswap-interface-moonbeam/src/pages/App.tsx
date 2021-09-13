@@ -81,7 +81,7 @@ const ProfitCircusAD = styled.div`
 
 const APY = styled.div`
   font-family: 'Carnivalee Freakshow', sans-serif;
-  font-size: 30px;
+  font-size: 25px;
   color: #FA8E48;
   position: relative;
   width: 100%;
@@ -89,6 +89,8 @@ const APY = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding-top: 5px;
 `
 
 export default function App() {
