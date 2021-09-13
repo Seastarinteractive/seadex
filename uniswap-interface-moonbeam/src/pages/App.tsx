@@ -137,7 +137,7 @@ export default function App() {
             </Web3ReactManager>
             {!!apy &&
               <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
-                <APY>{apy}% APR</APY>
+                <APY>Season ended</APY>
               </ProfitCircusAD>
             }
             <Marginer />
