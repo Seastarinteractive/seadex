@@ -21,6 +21,7 @@ import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 
 import ProfitCircusIcon from '../../src/assets/images/profit_circus_icon.png'
+import NFTBrawlIcon from '../../src/assets/images/nft_brawl_icon.png'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -57,13 +58,27 @@ const Marginer = styled.div`
   margin-top: 5rem;
 `
 
-const ProfitCircusAD = styled.div`
+const ADWrap = styled.div`
   position: absolute;
   top: 150px;
   right: 50px;
-  height: 150px;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 900px) {
+    position: relative;
+    top: 0;
+    right: 0;
+    flex-direction: row;
+  }
+`
+
+const ProfitCircusAD = styled.div`
+  height: 180px;
   width: 150px;
-  padding: 13px;
+  margin: 0 0 20px 0;
+  padding: 17px 10px;
   display: flex;
   align-items: flex-end;
   background-position: center center;
@@ -73,9 +88,25 @@ const ProfitCircusAD = styled.div`
   cursor: pointer;
 
   @media (max-width: 900px) {
-    position: relative;
-    top: 0;
-    right: 0;
+    margin: 0 20px 0 0;
+  }
+`
+
+const NFTBrawlAD = styled.div`
+  height: 180px;
+  width: 150px;
+  margin: 20px 0 0 0;
+  padding: 13px;
+  display: flex;
+  align-items: flex-end;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${NFTBrawlIcon});
+  cursor: pointer;
+
+  @media (max-width: 900px) {
+    margin: 0 0 0 20px;
   }
 `
 
@@ -89,8 +120,6 @@ const APY = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding-top: 5px;
 `
 
 export default function App() {
@@ -98,6 +127,7 @@ export default function App() {
 
   const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials'
   const profitCircusURL = 'https://moonriver.seascape.network/index/product/circus.html'
+  const nftBrawlURL = 'https://moonriver.seascape.network/index/product/nftbrawl.html?skin=light'
 
   const getAPY = async () => {
     const response = await fetch(apyURL)
@@ -115,11 +145,11 @@ export default function App() {
       <HashRouter>
         <Route component={GoogleAnalyticsReporter} />
         <Route component={DarkModeQueryParamReader} />
-        <AppWrapper >
+        <AppWrapper>
           <HeaderWrapper>
-            <Header  />
+            <Header />
           </HeaderWrapper>
-          <BodyWrapper >
+          <BodyWrapper>
             <Popups />
             <Web3ReactManager>
               <Switch>
@@ -137,11 +167,14 @@ export default function App() {
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
             </Web3ReactManager>
-            {!!apy &&
+            <ADWrap>
+              {!!apy &&
               <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
-                <APY>Season ended</APY>
+                <APY>{apy}% APR</APY>
               </ProfitCircusAD>
-            }
+              }
+              <NFTBrawlAD onClick={() => window.open(nftBrawlURL)}/>
+            </ADWrap>
             <Marginer />
           </BodyWrapper>
         </AppWrapper>
