@@ -20,8 +20,14 @@ import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 
-import ProfitCircusIcon from '../../src/assets/images/profit_circus_icon.png'
-import NFTBrawlIcon from '../../src/assets/images/nft_brawl_icon.png'
+import ProfitCircusIcon from '../assets/images/ad_icons/profit_circus_icon.png'
+import StackingSaloonIcon from '../assets/images/ad_icons/stacking_saloon_icon.png'
+// import LighthouseIcon from '../assets/images/ad_icons/lighthouse_icon.png'
+
+const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials'
+const profitCircusURL = 'https://moonriver.seascape.network/index/product/circus.html'
+const stackingSaloonURL = 'https://moonriver.seascape.network/index/product/saloon.html'
+// const lighthouseURL = 'https://seascape.house/'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -65,20 +71,22 @@ const ADWrap = styled.div`
   height: max-content;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   @media (max-width: 900px) {
     position: relative;
     top: 0;
     right: 0;
     flex-direction: row;
+    align-items: center;
   }
 `
 
 const ProfitCircusAD = styled.div`
   height: 180px;
-  width: 150px;
+  width: 170px;
   margin: 0 0 20px 0;
-  padding: 17px 10px;
+  padding: 20px 10px;
   display: flex;
   align-items: flex-end;
   background-position: center center;
@@ -92,17 +100,16 @@ const ProfitCircusAD = styled.div`
   }
 `
 
-const NFTBrawlAD = styled.div`
+const StackingSaloonAD = styled.div`
   height: 180px;
-  width: 150px;
+  width: 170px;
   margin: 20px 0 0 0;
-  padding: 13px;
   display: flex;
   align-items: flex-end;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(${NFTBrawlIcon});
+  background-image: url(${StackingSaloonIcon});
   cursor: pointer;
 
   @media (max-width: 900px) {
@@ -110,9 +117,26 @@ const NFTBrawlAD = styled.div`
   }
 `
 
+// const LighthouseAD = styled.div`
+//   height: 180px;
+//   width: 150px;
+//   margin: 20px 0 0 0;
+//   display: flex;
+//   align-items: flex-end;
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   background-image: url(${LighthouseIcon});
+//   cursor: pointer;
+//
+//   @media (max-width: 900px) {
+//     margin: 0 0 0 20px;
+//   }
+// `
+
 const APY = styled.div`
   font-family: 'Carnivalee Freakshow', sans-serif;
-  font-size: 25px;
+  font-size: 30px;
   color: #FA8E48;
   position: relative;
   width: 100%;
@@ -124,10 +148,6 @@ const APY = styled.div`
 
 export default function App() {
   const [apy, setAPY] = React.useState<any>();
-
-  const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials'
-  const profitCircusURL = 'https://moonriver.seascape.network/index/product/circus.html'
-  const nftBrawlURL = 'https://moonriver.seascape.network/index/product/nftbrawl.html?skin=light'
 
   const getAPY = async () => {
     const response = await fetch(apyURL)
@@ -173,7 +193,8 @@ export default function App() {
                 <APY>{apy}% APR</APY>
               </ProfitCircusAD>
               }
-              <NFTBrawlAD onClick={() => window.open(nftBrawlURL)}/>
+              <StackingSaloonAD onClick={() => window.open(stackingSaloonURL)}/>
+              {/*<LighthouseAD onClick={() => window.open(lighthouseURL)}/>*/}
             </ADWrap>
             <Marginer />
           </BodyWrapper>
