@@ -22,12 +22,12 @@ import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redir
 
 import ProfitCircusIcon from '../assets/images/ad_icons/profit_circus_icon.png'
 import StackingSaloonIcon from '../assets/images/ad_icons/stacking_saloon_icon.png'
-// import LighthouseIcon from '../assets/images/ad_icons/lighthouse_icon.png'
+import LighthouseIcon from '../assets/images/ad_icons/lighthouse_icon.png'
 
 const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials'
 const profitCircusURL = 'https://moonriver.seascape.network/index/product/circus.html'
 const stackingSaloonURL = 'https://moonriver.seascape.network/index/product/saloon.html'
-// const lighthouseURL = 'https://seascape.house/'
+const lighthouseURL = 'https://seascape.house/'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -117,22 +117,22 @@ const StackingSaloonAD = styled.div`
   }
 `
 
-// const LighthouseAD = styled.div`
-//   height: 180px;
-//   width: 150px;
-//   margin: 20px 0 0 0;
-//   display: flex;
-//   align-items: flex-end;
-//   background-position: center center;
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   background-image: url(${LighthouseIcon});
-//   cursor: pointer;
-//
-//   @media (max-width: 900px) {
-//     margin: 0 0 0 20px;
-//   }
-// `
+const LighthouseAD = styled.div`
+  height: 180px;
+  width: 150px;
+  margin: 20px 0 0 0;
+  display: flex;
+  align-items: flex-end;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${LighthouseIcon});
+  cursor: pointer;
+
+  @media (max-width: 900px) {
+    margin: 0 0 0 20px;
+  }
+`
 
 const APY = styled.div`
   font-family: 'Carnivalee Freakshow', sans-serif;
@@ -194,7 +194,7 @@ export default function App() {
               </ProfitCircusAD>
               }
               <StackingSaloonAD onClick={() => window.open(stackingSaloonURL)}/>
-              {/*<LighthouseAD onClick={() => window.open(lighthouseURL)}/>*/}
+              <LighthouseAD onClick={() => window.open(lighthouseURL)}/>
             </ADWrap>
             <Marginer />
           </BodyWrapper>
