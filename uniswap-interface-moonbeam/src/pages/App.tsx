@@ -24,7 +24,6 @@ import ProfitCircusIcon from '../assets/images/ad_icons/profit_circus_icon.png'
 import StackingSaloonIcon from '../assets/images/ad_icons/stacking_saloon_icon.png'
 import LighthouseIcon from '../assets/images/ad_icons/lighthouse_icon.png'
 
-const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials'
 const profitCircusURL = 'https://moonriver.seascape.network/index/product/circus.html'
 const stackingSaloonURL = 'https://moonriver.seascape.network/index/product/saloon.html'
 const lighthouseURL = 'https://seascape.house/'
@@ -103,7 +102,7 @@ const ProfitCircusAD = styled.div`
 const StackingSaloonAD = styled.div`
   height: 180px;
   width: 170px;
-  margin: 20px 0 0 0;
+  margin: 0;
   display: flex;
   align-items: flex-end;
   background-position: center center;
@@ -111,10 +110,6 @@ const StackingSaloonAD = styled.div`
   background-size: cover;
   background-image: url(${StackingSaloonIcon});
   cursor: pointer;
-
-  @media (max-width: 900px) {
-    margin: 0 0 0 20px;
-  }
 `
 
 const LighthouseAD = styled.div`
@@ -136,10 +131,10 @@ const LighthouseAD = styled.div`
 
 const APY = styled.div`
   font-family: 'Carnivalee Freakshow', sans-serif;
-  font-size: 30px;
+  font-size: 22px;
   color: #FA8E48;
   position: relative;
-  width: 100%;
+  width: 98%;
   height: 30%;
   display: flex;
   align-items: center;
@@ -147,18 +142,6 @@ const APY = styled.div`
 `
 
 export default function App() {
-  const [apy, setAPY] = React.useState<any>();
-
-  const getAPY = async () => {
-    const response = await fetch(apyURL)
-    const json = await response.json()
-    setAPY(Math.round(json.apy))
-  }
-
-  React.useEffect(() => {
-    getAPY()
-  }, [])
-
   return (
     <Suspense fallback={null} >
       <GlobalFonts />
@@ -188,13 +171,14 @@ export default function App() {
               </Switch>
             </Web3ReactManager>
             <ADWrap>
-              {!!apy &&
               <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
-                <APY>{apy}% APR</APY>
+                <APY>SEASON ENDED</APY>
               </ProfitCircusAD>
-              }
+
               <StackingSaloonAD onClick={() => window.open(stackingSaloonURL)}/>
+
               <LighthouseAD onClick={() => window.open(lighthouseURL)}/>
+
             </ADWrap>
             <Marginer />
           </BodyWrapper>
