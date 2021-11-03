@@ -21,11 +21,10 @@ import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 
 import ProfitCircusIcon from '../assets/images/ad_icons/profit_circus_icon.png'
-import StackingSaloonIcon from '../assets/images/ad_icons/stacking_saloon_icon.png'
 import LighthouseIcon from '../assets/images/ad_icons/lighthouse_icon.png'
 
-const profitCircusURL = 'https://moonriver.seascape.network/index/product/circus.html'
-const stackingSaloonURL = 'https://moonriver.seascape.network/index/product/saloon.html'
+const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials/0'
+const profitCircusURL = 'https://moonriver.seascape.network/index/product/moonriver_circus.html'
 const lighthouseURL = 'https://seascape.house/'
 
 const AppWrapper = styled.div`
@@ -99,19 +98,6 @@ const ProfitCircusAD = styled.div`
   }
 `
 
-const StackingSaloonAD = styled.div`
-  height: 180px;
-  width: 170px;
-  margin: 0;
-  display: flex;
-  align-items: flex-end;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url(${StackingSaloonIcon});
-  cursor: pointer;
-`
-
 const LighthouseAD = styled.div`
   height: 180px;
   width: 150px;
@@ -131,7 +117,7 @@ const LighthouseAD = styled.div`
 
 const APY = styled.div`
   font-family: 'Carnivalee Freakshow', sans-serif;
-  font-size: 22px;
+  font-size: 28px;
   color: #FA8E48;
   position: relative;
   width: 98%;
@@ -142,6 +128,18 @@ const APY = styled.div`
 `
 
 export default function App() {
+  const [apy, setAPY] = React.useState<any>();
+
+  const getAPY = async () => {
+    const response = await fetch(apyURL)
+    const json = await response.json()
+    setAPY(Math.round(json.apy))
+  }
+
+  React.useEffect(() => {
+    getAPY()
+  }, [])
+
   return (
     <Suspense fallback={null} >
       <GlobalFonts />
@@ -172,10 +170,8 @@ export default function App() {
             </Web3ReactManager>
             <ADWrap>
               <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
-                <APY>SEASON ENDED</APY>
+                <APY>{apy}% APR</APY>
               </ProfitCircusAD>
-
-              <StackingSaloonAD onClick={() => window.open(stackingSaloonURL)}/>
 
               <LighthouseAD onClick={() => window.open(lighthouseURL)}/>
 
