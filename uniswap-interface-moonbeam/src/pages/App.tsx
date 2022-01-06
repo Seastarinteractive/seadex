@@ -20,11 +20,12 @@ import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 
-import ProfitCircusIcon from '../assets/images/ad_icons/profit_circus_icon.png'
+import NftBrawlIcon from '../assets/images/ad_icons/nft_brawl_icon.png'
+import RiverBoatIcon from '../assets/images/ad_icons/riverBoat_icon.png'
 import LighthouseIcon from '../assets/images/ad_icons/lighthouse_icon.png'
 
-const apyURL = 'https://moonriver-api.seascape.network/profit-circus/credentials/0'
-const profitCircusURL = 'https://moonriver.seascape.network/index/product/moonriver_circus.html'
+const nftBrawlURL = 'https://moonriver.seascape.network/index/product/nftbrawl.html'
+const riverBoatURL = 'https://scape.store/riverboats'
 const lighthouseURL = 'https://seascape.house/'
 
 const AppWrapper = styled.div`
@@ -80,7 +81,7 @@ const ADWrap = styled.div`
   }
 `
 
-const ProfitCircusAD = styled.div`
+const NftBrawlAD = styled.div`
   height: 180px;
   width: 170px;
   margin: 0 0 20px 0;
@@ -90,11 +91,29 @@ const ProfitCircusAD = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(${ProfitCircusIcon});
+  background-image: url(${NftBrawlIcon});
   cursor: pointer;
 
   @media (max-width: 900px) {
     margin: 0 20px 0 0;
+  }
+`
+
+const RiverBoatAD = styled.div`
+  height: 180px;
+  width: 170px;
+  margin: 20px 0;
+  padding: 20px 10px;
+  display: flex;
+  align-items: flex-end;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${RiverBoatIcon});
+  cursor: pointer;
+
+  @media (max-width: 900px) {
+    margin: 0 20px;
   }
 `
 
@@ -115,31 +134,7 @@ const LighthouseAD = styled.div`
   }
 `
 
-const APY = styled.div`
-  font-family: 'Carnivalee Freakshow', sans-serif;
-  font-size: 28px;
-  color: #FA8E48;
-  position: relative;
-  width: 98%;
-  height: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
 export default function App() {
-  const [apy, setAPY] = React.useState<any>();
-
-  const getAPY = async () => {
-    const response = await fetch(apyURL)
-    const json = await response.json()
-    setAPY(Math.round(json.apy))
-  }
-
-  React.useEffect(() => {
-    getAPY()
-  }, [])
-
   return (
     <Suspense fallback={null} >
       <GlobalFonts />
@@ -169,12 +164,9 @@ export default function App() {
               </Switch>
             </Web3ReactManager>
             <ADWrap>
-              <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
-                <APY>{apy}% APR</APY>
-              </ProfitCircusAD>
-
-              <LighthouseAD onClick={() => window.open(lighthouseURL)}/>
-
+              <NftBrawlAD onClick={() => window.open(nftBrawlURL)} />
+              <RiverBoatAD onClick={() => window.open(riverBoatURL)} />
+              <LighthouseAD onClick={() => window.open(lighthouseURL)} />
             </ADWrap>
             <Marginer />
           </BodyWrapper>
