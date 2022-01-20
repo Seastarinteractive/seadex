@@ -72,7 +72,7 @@
     "rebass": "^4.0.7",
     "redux-localstorage-simple": "^2.4.1",
     "seadexswap": "^1.0.6",
-    "seadexswap-test-moonriver": "^1.0.5",
+    "seadexswap-test-moonriver": "^1.0.6",
     "serve": "^11.3.0",
     "start-server-and-test": "^1.13.1",
     "styled-components": "^4.2.0",
