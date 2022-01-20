@@ -1,0 +1,8 @@
+{
+    "WETH": "0xc5f6499612B049E40b05af7b7922a57954eE8c53",
+    "factory": "0x0D987781cc9D592e606a610130681D6Ecb816EC7",
+    "callhash": "0xbC6ea470C37cCFf80C8a5E2aaBb2932845Ec25a9",
+    "routerv2": "0x5dC1E26ba4d9f621de02A9bC3214D91186CD2856",
+    "multicall": "0x773fd4b7214804dB852bdEA008c750736a832418",
+    "init_code_hash": "0x85ef54c7b11fa267122f455865e82ffddd40f6604eaabc1e0e8c3646b55f08cc"
+  }
