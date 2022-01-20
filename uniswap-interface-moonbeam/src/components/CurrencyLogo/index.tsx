@@ -1,4 +1,4 @@
-import { Currency, MOVR, Token } from 'seadexswap'
+import { Currency, MOVR, Token } from 'seadexswap-test-moonriver'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -17,7 +17,7 @@ const StyledMoonbeamLogo = styled.img<{ size: string }>`
   border-radius: 24px;
 `
 
-const StyledLogo = styled(Logo)<{ size: string }>`
+const StyledLogo = styled(Logo) <{ size: string }>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
 `

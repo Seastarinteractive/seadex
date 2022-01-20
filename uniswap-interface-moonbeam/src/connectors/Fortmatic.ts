@@ -1,4 +1,4 @@
-import { ChainId } from 'seadexswap'
+import { ChainId } from 'seadexswap-test-moonriver'
 import { FortmaticConnector as FortmaticConnectorCore } from '@web3-react/fortmatic-connector'
 
 export const OVERLAY_READY = 'OVERLAY_READY'

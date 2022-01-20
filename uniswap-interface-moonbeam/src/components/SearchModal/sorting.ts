@@ -1,4 +1,4 @@
-import { Token, TokenAmount } from 'seadexswap'
+import { Token, TokenAmount } from 'seadexswap-test-moonriver'
 import { useMemo } from 'react'
 import { useAllTokenBalances } from '../../state/wallet/hooks'
 

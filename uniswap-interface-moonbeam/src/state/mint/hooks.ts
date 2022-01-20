@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, MOVR, JSBI, Pair, Percent, Price, TokenAmount } from 'seadexswap'
+import { Currency, CurrencyAmount, MOVR, JSBI, Pair, Percent, Price, TokenAmount } from 'seadexswap-test-moonriver'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { PairState, usePair } from '../../data/Reserves'

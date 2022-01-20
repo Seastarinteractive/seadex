@@ -1,4 +1,4 @@
-import { Trade, TradeType } from 'seadexswap'
+import { Trade, TradeType } from 'seadexswap-test-moonriver'
 import React, { useContext, useMemo } from 'react'
 import { ArrowDown, AlertTriangle } from 'react-feather'
 import { Text } from 'rebass'
@@ -67,8 +67,8 @@ export default function SwapModalHeader({
               priceImpactSeverity > 2
                 ? theme.red1
                 : showAcceptChanges && trade.tradeType === TradeType.EXACT_INPUT
-                ? theme.primary1
-                : ''
+                  ? theme.primary1
+                  : ''
             }
           >
             {trade.outputAmount.toSignificant(6)}

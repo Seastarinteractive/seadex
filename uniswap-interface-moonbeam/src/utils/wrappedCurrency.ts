@@ -1,4 +1,4 @@
-import { ChainId, Currency, CurrencyAmount, MOVR, Token, TokenAmount, WMOVR } from 'seadexswap'
+import { ChainId, Currency, CurrencyAmount, MOVR, Token, TokenAmount, WMOVR } from 'seadexswap-test-moonriver'
 
 export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {
   return chainId && currency === MOVR ? WMOVR[chainId] : currency instanceof Token ? currency : undefined

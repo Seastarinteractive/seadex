@@ -1,4 +1,4 @@
-import { Percent } from 'seadexswap'
+import { Percent } from 'seadexswap-test-moonriver'
 import React from 'react'
 import { ONE_BIPS } from '../../constants'
 import { warningSeverity } from '../../utils/prices'

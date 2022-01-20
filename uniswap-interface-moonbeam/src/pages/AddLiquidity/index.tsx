@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, MOVR, TokenAmount, WMOVR } from 'seadexswap'
+import { Currency, currencyEquals, MOVR, TokenAmount, WMOVR } from 'seadexswap-test-moonriver'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -52,8 +52,8 @@ export default function AddLiquidity({
 
   const oneCurrencyIsWDEV = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(currencyA, WMOVR[chainId])) ||
-        (currencyB && currencyEquals(currencyB, WMOVR[chainId])))
+    ((currencyA && currencyEquals(currencyA, WMOVR[chainId])) ||
+      (currencyB && currencyEquals(currencyB, WMOVR[chainId])))
   )
 
   const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
@@ -269,9 +269,8 @@ export default function AddLiquidity({
     )
   }
 
-  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-    currencies[Field.CURRENCY_A]?.symbol
-  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
+  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencies[Field.CURRENCY_A]?.symbol
+    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {

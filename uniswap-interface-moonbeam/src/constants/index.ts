@@ -1,7 +1,8 @@
-import { ChainId, JSBI, Percent, Token, WMOVR } from 'seadexswap'
+import { ChainId, JSBI, Percent, Token, WMOVR } from 'seadexswap-test-moonriver'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { routerv2 } from '../moonbase_address.json'
 import { routerv2 as riverRouterV2 } from '../moonriver_address.json'
+import { routerv2 as beamRouterV2 } from '../moonbeam_address.json'
 
 import { injected, walletconnect, walletlink } from '../connectors'
 //fortmatic, portis, walletconnect, walletlink, lattice
@@ -11,6 +12,7 @@ export const ROUTER_ADDRESS: { [key: string]: string } = {
   [ChainId.MOONBASE]: routerv2,
   [ChainId.MOONSHADOW]: routerv2,
   [ChainId.MOONRIVER]: riverRouterV2,
+  [ChainId.MOONBEAM]: beamRouterV2
 }
 
 // a list of tokens by chain
@@ -43,6 +45,7 @@ export const ALPHA = new Token(ChainId.MAINNET, '0xa1faa113cbE53436Df28FF0aEe542
 
 const WMOVR_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WMOVR[ChainId.MAINNET]],
+  [ChainId.MOONBEAM]: [WMOVR[ChainId.MOONBEAM]],
   [ChainId.MOONRIVER]: [WMOVR[ChainId.MOONRIVER]],
   [ChainId.STANDALONE]: [WMOVR[ChainId.STANDALONE]],
   [ChainId.MOONROCK]: [WMOVR[ChainId.MOONROCK]],
@@ -132,7 +135,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Easy-to-use browser extension.',
     href: null,
     color: '#E8831D',
-  } ,
+  },
   WALLET_CONNECT: {
     connector: walletconnect,
     name: 'WalletConnect',

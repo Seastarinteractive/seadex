@@ -5,7 +5,7 @@ import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
 import { ROUTER_ADDRESS } from '../constants'
-import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, MOVR } from 'seadexswap'
+import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, MOVR } from 'seadexswap-test-moonriver'
 import { TokenAddressMap } from '../state/lists/hooks'
 
 // returns the checksummed address if the address is valid, otherwise returns false
@@ -21,6 +21,7 @@ export function isAddress(value: any): string | false {
 const DEVSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   1: '',
   1281: '',
+  1284: 'https://blockscout.moonbeam.network',
   1285: 'https://blockscout.moonriver.moonbeam.network',
   1286: '',
   1287: 'https://moonbase-blockscout.testnet.moonbeam.network',

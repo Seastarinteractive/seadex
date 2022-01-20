@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainId, Currency, currencyEquals, MOVR, Token } from 'seadexswap'
+import { ChainId, Currency, currencyEquals, MOVR, Token } from 'seadexswap-test-moonriver'
 import styled from 'styled-components'
 
 import { SUGGESTED_BASES } from '../../constants'
@@ -53,7 +53,7 @@ export default function CommonBases({
         >
           <CurrencyLogo currency={MOVR} style={{ marginRight: 8 }} />
           <Text fontWeight={500} fontSize={16}>
-            MOVR 
+            MOVR
           </Text>
         </BaseWrapper>
         {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {

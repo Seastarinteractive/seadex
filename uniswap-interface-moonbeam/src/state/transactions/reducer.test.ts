@@ -1,4 +1,4 @@
-import { ChainId } from 'seadexswap'
+import { ChainId } from 'seadexswap-test-moonriver'
 import { createStore, Store } from 'redux'
 import { addTransaction, checkedTransaction, clearAllTransactions, finalizeTransaction } from './actions'
 import reducer, { initialState, TransactionState } from './reducer'

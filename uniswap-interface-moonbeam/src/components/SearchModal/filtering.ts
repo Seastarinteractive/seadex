@@ -1,5 +1,5 @@
 import { isAddress } from '../../utils'
-import { Token } from 'seadexswap'
+import { Token } from 'seadexswap-test-moonriver'
 
 export function filterTokens(tokens: Token[], search: string): Token[] {
   if (search.length === 0) return tokens

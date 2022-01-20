@@ -1,4 +1,4 @@
-import { Trade } from 'seadexswap'
+import { Trade } from 'seadexswap-test-moonriver'
 import React, { Fragment, memo, useContext } from 'react'
 import { ChevronRight } from 'react-feather'
 import { Flex } from 'rebass'

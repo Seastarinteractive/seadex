@@ -1,6 +1,6 @@
 import useENS from '../../hooks/useENS'
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, MOVR, JSBI, Token, TokenAmount, Trade } from 'seadexswap'
+import { Currency, CurrencyAmount, MOVR, JSBI, Token, TokenAmount, Trade } from 'seadexswap-test-moonriver'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'

@@ -1,4 +1,4 @@
-import { ChainId, Token } from 'seadexswap'
+import { ChainId, Token } from 'seadexswap-test-moonriver'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
@@ -36,7 +36,8 @@ const EMPTY_LIST: TokenAddressMap = {
   [ChainId.MOONROCK]: {},
   [ChainId.MOONBASE]: {},
   [ChainId.MOONSHADOW]: {},
-  [ChainId.MOONRIVER]: {}
+  [ChainId.MOONRIVER]: {},
+  [ChainId.MOONBEAM]: {},
 }
 
 const listCache: WeakMap<TokenList, TokenAddressMap> | null =

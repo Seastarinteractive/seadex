@@ -1,5 +1,5 @@
 import React from 'react'
-import { Price } from 'seadexswap'
+import { Price } from 'seadexswap-test-moonriver'
 import { useContext } from 'react'
 import { Repeat } from 'react-feather'
 import { Text } from 'rebass'

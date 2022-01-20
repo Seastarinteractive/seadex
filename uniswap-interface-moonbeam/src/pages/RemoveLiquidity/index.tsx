@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, MOVR, Percent, WMOVR } from 'seadexswap'
+import { Currency, currencyEquals, MOVR, Percent, WMOVR } from 'seadexswap-test-moonriver'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -82,8 +82,8 @@ export default function RemoveLiquidity({
     [Field.LIQUIDITY_PERCENT]: parsedAmounts[Field.LIQUIDITY_PERCENT].equalTo('0')
       ? '0'
       : parsedAmounts[Field.LIQUIDITY_PERCENT].lessThan(new Percent('1', '100'))
-      ? '<1'
-      : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
+        ? '<1'
+        : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
     [Field.LIQUIDITY]:
       independentField === Field.LIQUIDITY ? typedValue : parsedAmounts[Field.LIQUIDITY]?.toSignificant(6) ?? '',
     [Field.CURRENCY_A]:
@@ -415,9 +415,8 @@ export default function RemoveLiquidity({
     )
   }
 
-  const pendingText = `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-    currencyA?.symbol
-  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencyB?.symbol}`
+  const pendingText = `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencyA?.symbol
+    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencyB?.symbol}`
 
   const liquidityPercentChangeCallback = useCallback(
     (value: number) => {
@@ -429,8 +428,8 @@ export default function RemoveLiquidity({
   const oneCurrencyIsETH = currencyA === MOVR || currencyB === MOVR
   const oneCurrencyIsWDEV = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(WMOVR[chainId], currencyA)) ||
-        (currencyB && currencyEquals(WMOVR[chainId], currencyB)))
+    ((currencyA && currencyEquals(WMOVR[chainId], currencyA)) ||
+      (currencyB && currencyEquals(WMOVR[chainId], currencyB)))
   )
 
   const handleSelectCurrencyA = useCallback(
@@ -562,17 +561,15 @@ export default function RemoveLiquidity({
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA === MOVR ? WMOVR[chainId].address : currencyIdA}/${
-                              currencyB === MOVR ? WMOVR[chainId].address : currencyIdB
-                            }`}
+                            to={`/remove/${currencyA === MOVR ? WMOVR[chainId].address : currencyIdA}/${currencyB === MOVR ? WMOVR[chainId].address : currencyIdB
+                              }`}
                           >
                             Receive WMOVR
                           </StyledInternalLink>
                         ) : oneCurrencyIsWDEV ? (
                           <StyledInternalLink
-                            to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WMOVR[chainId]) ? 'MOVR' : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WMOVR[chainId]) ? 'MOVR' : currencyIdB}`}
+                            to={`/remove/${currencyA && currencyEquals(currencyA, WMOVR[chainId]) ? 'MOVR' : currencyIdA
+                              }/${currencyB && currencyEquals(currencyB, WMOVR[chainId]) ? 'MOVR' : currencyIdB}`}
                           >
                             Receive MOVR
                           </StyledInternalLink>

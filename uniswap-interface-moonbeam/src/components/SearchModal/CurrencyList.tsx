@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, MOVR, Token } from 'seadexswap'
+import { Currency, CurrencyAmount, currencyEquals, MOVR, Token } from 'seadexswap-test-moonriver'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'

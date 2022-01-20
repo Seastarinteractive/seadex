@@ -1,4 +1,4 @@
-import { CurrencyAmount, MOVR, JSBI } from 'seadexswap'
+import { CurrencyAmount, MOVR, JSBI } from 'seadexswap-test-moonriver'
 import { MIN_ETH } from '../constants'
 
 /**
