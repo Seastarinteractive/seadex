@@ -1,5 +1,5 @@
 import { parseBytes32String } from '@ethersproject/strings'
-import { Currency, MOVR, Token, currencyEquals } from 'seadexswap-test-moonriver'
+import { Currency, MOVR, GLMR, DEV, Token, currencyEquals, ChainId } from 'seadexswap-test-moonriver'
 import { useMemo } from 'react'
 import { useSelectedTokenList } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
@@ -101,8 +101,13 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
   ])
 }
 
-export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
-  const isETH = currencyId?.toUpperCase() === 'MOVR' || currencyId?.toUpperCase() === 'MOVR'
+export function useCurrency(currencyId: string | undefined, chainId: ChainId | undefined): Currency | null | undefined {
+  const isETH = currencyId?.toUpperCase() === 'MOVR' || currencyId?.toUpperCase() === 'GLMR' || currencyId?.toUpperCase() === 'DEV'
   const token = useToken(isETH ? undefined : currencyId)
-  return isETH ? MOVR : token
+  if (isETH) {
+    if (chainId === 1284) return GLMR;
+    if (chainId === 1285) return MOVR;
+    if (chainId === 1287) return DEV;
+  }
+  return token;
 }

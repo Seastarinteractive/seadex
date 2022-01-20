@@ -1,4 +1,4 @@
-import { Currency, MOVR, JSBI, TokenAmount } from 'seadexswap-test-moonriver'
+import { Currency, JSBI, TokenAmount } from 'seadexswap-test-moonriver'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Plus } from 'react-feather'
 import { Text } from 'rebass'
@@ -18,6 +18,7 @@ import { StyledInternalLink } from '../../theme'
 import { currencyId } from '../../utils/currencyId'
 import AppBody from '../AppBody'
 import { Dots } from '../Pool/styleds'
+import { CURRENCY_CLASSES } from '../../constants'
 
 enum Fields {
   TOKEN0 = 0,
@@ -25,12 +26,12 @@ enum Fields {
 }
 
 export default function PoolFinder() {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   const [showSearch, setShowSearch] = useState<boolean>(false)
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
 
-  const [currency0, setCurrency0] = useState<Currency | null>(MOVR)
+  const [currency0, setCurrency0] = useState<Currency | null>(chainId ? CURRENCY_CLASSES[chainId] : null)
   const [currency1, setCurrency1] = useState<Currency | null>(null)
 
   const [pairState, pair] = usePair(currency0 ?? undefined, currency1 ?? undefined)

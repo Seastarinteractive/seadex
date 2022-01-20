@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent, Token, WMOVR } from 'seadexswap-test-moonriver'
+import { ChainId, Currency, JSBI, Percent, Token, WMOVR } from 'seadexswap-test-moonriver'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { routerv2 } from '../moonbase_address.json'
 import { routerv2 as riverRouterV2 } from '../moonriver_address.json'
@@ -213,3 +213,33 @@ export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(
 // used to ensure the user doesn't send so much MOVR so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 MOVR
 export const BETTER_TRADE_LINK_THRESHOLD = new Percent(JSBI.BigInt(75), JSBI.BigInt(10000))
+
+export const CURRENCY_LABELS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: "MOVR", //making other currencies as MOVR, because of sdk
+  [ChainId.MOONBEAM]: "GLMR",
+  [ChainId.MOONRIVER]: "MOVR",
+  [ChainId.STANDALONE]: 'MOVR',
+  [ChainId.MOONROCK]: 'MOVR',
+  [ChainId.MOONBASE]: 'DEV',
+  [ChainId.MOONSHADOW]: 'MOVR',
+}
+
+export const WRAPPED_CURRENCY_LABELS: { [chainId in ChainId]: string } = {
+  [ChainId.MAINNET]: "WMOVR", //making other currencies as MOVR, because of sdk
+  [ChainId.MOONBEAM]: "WGLMR",
+  [ChainId.MOONRIVER]: "WMOVR",
+  [ChainId.STANDALONE]: 'WMOVR',
+  [ChainId.MOONROCK]: 'WMOVR',
+  [ChainId.MOONBASE]: 'WDEV',
+  [ChainId.MOONSHADOW]: 'WMOVR',
+}
+
+export const CURRENCY_CLASSES: { [chainId in ChainId]: Currency } = {
+  [ChainId.MAINNET]: Currency.MOVR, //making other currencies as MOVR, because of sdk
+  [ChainId.MOONBEAM]: Currency.GLMR,
+  [ChainId.MOONRIVER]: Currency.MOVR,
+  [ChainId.STANDALONE]: Currency.MOVR,
+  [ChainId.MOONROCK]: Currency.MOVR,
+  [ChainId.MOONBASE]: Currency.DEV,
+  [ChainId.MOONSHADOW]: Currency.MOVR,
+}

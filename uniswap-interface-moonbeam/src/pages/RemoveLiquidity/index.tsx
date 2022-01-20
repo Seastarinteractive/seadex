@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, MOVR, Percent, WMOVR } from 'seadexswap-test-moonriver'
+import { Currency, currencyEquals, MOVR, GLMR, DEV, Percent, WMOVR } from 'seadexswap-test-moonriver'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -20,7 +20,7 @@ import Row, { RowBetween, RowFixed } from '../../components/Row'
 
 import Slider from '../../components/Slider'
 import CurrencyLogo from '../../components/CurrencyLogo'
-import { ROUTER_ADDRESS } from '../../constants'
+import { CURRENCY_LABELS, ROUTER_ADDRESS, WRAPPED_CURRENCY_LABELS } from '../../constants'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
 import { usePairContract } from '../../hooks/useContract'
@@ -49,8 +49,9 @@ export default function RemoveLiquidity({
     params: { currencyIdA, currencyIdB }
   }
 }: RouteComponentProps<{ currencyIdA: string; currencyIdB: string }>) {
-  const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
   const { account, chainId, library } = useActiveWeb3React()
+  const [currencyA, currencyB] = [useCurrency(currencyIdA, chainId) ?? undefined, useCurrency(currencyIdB, chainId) ?? undefined]
+
   const [tokenA, tokenB] = useMemo(() => [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)], [
     currencyA,
     currencyB,
@@ -205,8 +206,8 @@ export default function RemoveLiquidity({
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    const currencyBIsETH = currencyB === MOVR
-    const oneCurrencyIsETH = currencyA === MOVR || currencyBIsETH
+    const currencyBIsETH = currencyB === MOVR || currencyB === GLMR || currencyB === DEV
+    const oneCurrencyIsETH = currencyA === MOVR || currencyA === GLMR || currencyA === DEV || currencyBIsETH
     const deadlineFromNow = Math.ceil(Date.now() / 1000) + deadline
 
     if (!tokenA || !tokenB) throw new Error('could not wrap')
@@ -425,7 +426,7 @@ export default function RemoveLiquidity({
     [onUserInput]
   )
 
-  const oneCurrencyIsETH = currencyA === MOVR || currencyB === MOVR
+  const oneCurrencyIsETH = currencyA === MOVR || currencyA === GLMR || currencyA === DEV || currencyB === MOVR || currencyB === GLMR || currencyB === DEV
   const oneCurrencyIsWDEV = Boolean(
     chainId &&
     ((currencyA && currencyEquals(WMOVR[chainId], currencyA)) ||
@@ -561,17 +562,17 @@ export default function RemoveLiquidity({
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA === MOVR ? WMOVR[chainId].address : currencyIdA}/${currencyB === MOVR ? WMOVR[chainId].address : currencyIdB
+                            to={`/remove/${currencyA === MOVR || currencyA === GLMR || currencyA === DEV ? WMOVR[chainId].address : currencyIdA}/${currencyB === MOVR || currencyB === GLMR || currencyB === DEV ? WMOVR[chainId].address : currencyIdB
                               }`}
                           >
-                            Receive WMOVR
+                            {`Receive ${WRAPPED_CURRENCY_LABELS[chainId]}`}
                           </StyledInternalLink>
                         ) : oneCurrencyIsWDEV ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA && currencyEquals(currencyA, WMOVR[chainId]) ? 'MOVR' : currencyIdA
-                              }/${currencyB && currencyEquals(currencyB, WMOVR[chainId]) ? 'MOVR' : currencyIdB}`}
+                            to={`/remove/${currencyA && currencyEquals(currencyA, WMOVR[chainId]) ? CURRENCY_LABELS[chainId] : currencyIdA
+                              }/${currencyB && currencyEquals(currencyB, WMOVR[chainId]) ? CURRENCY_LABELS[chainId] : currencyIdB}`}
                           >
-                            Receive MOVR
+                            {`Receive ${CURRENCY_LABELS[chainId]}`}
                           </StyledInternalLink>
                         ) : null}
                       </RowBetween>

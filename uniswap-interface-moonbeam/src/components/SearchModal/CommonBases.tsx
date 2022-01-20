@@ -1,9 +1,9 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainId, Currency, currencyEquals, MOVR, Token } from 'seadexswap-test-moonriver'
+import { ChainId, Currency, currencyEquals, MOVR, GLMR, DEV, Token } from 'seadexswap-test-moonriver'
 import styled from 'styled-components'
 
-import { SUGGESTED_BASES } from '../../constants'
+import { CURRENCY_LABELS, SUGGESTED_BASES } from '../../constants'
 import { AutoColumn } from '../Column'
 import QuestionHelper from '../QuestionHelper'
 import { AutoRow } from '../Row'
@@ -45,15 +45,25 @@ export default function CommonBases({
       <AutoRow gap="4px">
         <BaseWrapper
           onClick={() => {
-            if (!selectedCurrency || !currencyEquals(selectedCurrency, MOVR)) {
-              onSelect(MOVR)
+            if (chainId === 1284) {
+              if (!selectedCurrency || !currencyEquals(selectedCurrency, GLMR)) {
+                onSelect(GLMR)
+              }
+            } else if (chainId === 1285) {
+              if (!selectedCurrency || !currencyEquals(selectedCurrency, MOVR)) {
+                onSelect(MOVR)
+              }
+            } else if (chainId === 1287) {
+              if (!selectedCurrency || !currencyEquals(selectedCurrency, DEV)) {
+                onSelect(DEV)
+              }
             }
           }}
-          disable={selectedCurrency === MOVR}
+          disable={selectedCurrency === MOVR || selectedCurrency === GLMR || selectedCurrency === DEV}
         >
           <CurrencyLogo currency={MOVR} style={{ marginRight: 8 }} />
           <Text fontWeight={500} fontSize={16}>
-            MOVR
+            {!!chainId ? CURRENCY_LABELS[chainId] : ''}
           </Text>
         </BaseWrapper>
         {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {

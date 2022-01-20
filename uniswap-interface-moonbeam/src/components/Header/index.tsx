@@ -16,6 +16,7 @@ import Menu from '../Menu'
 
 import { RowBetween } from '../Row'
 import Web3Status from '../Web3Status'
+import { CURRENCY_LABELS } from '../../constants'
 // import VersionSwitch from './VersionSwitch'
 
 const HeaderFrame = styled.div`
@@ -144,9 +145,9 @@ export default function Header() {
               {!isMobile && chainId && NETWORK_LABELS[chainId] && <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>}
             </TestnetWrapper>
             <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
-              {account && userEthBalance ? (
+              {account && chainId && userEthBalance ? (
                 <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                  {userEthBalance?.toSignificant(4)} MOVR
+                  {userEthBalance?.toSignificant(4) + ' ' + CURRENCY_LABELS[chainId]}
                 </BalanceText>
               ) : null}
               <Web3Status />

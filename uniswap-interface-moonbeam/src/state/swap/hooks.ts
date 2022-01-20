@@ -1,6 +1,6 @@
 import useENS from '../../hooks/useENS'
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, MOVR, JSBI, Token, TokenAmount, Trade } from 'seadexswap-test-moonriver'
+import { Currency, CurrencyAmount, MOVR, GLMR, DEV, JSBI, Token, TokenAmount, Trade } from 'seadexswap-test-moonriver'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,7 +35,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === MOVR ? 'MOVR' : ''
+          currencyId: currency instanceof Token ? currency.address : currency === MOVR ? 'MOVR' : currency === GLMR ? 'GLMR' : currency === DEV ? 'DEV' : ''
         })
       )
     },
@@ -113,7 +113,7 @@ export function useDerivedSwapInfo(): {
   v2Trade: Trade | undefined
   inputError?: string
 } {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   const { t } = useTranslation()
 
@@ -125,8 +125,8 @@ export function useDerivedSwapInfo(): {
     recipient
   } = useSwapState()
 
-  const inputCurrency = useCurrency(inputCurrencyId)
-  const outputCurrency = useCurrency(outputCurrencyId)
+  const inputCurrency = useCurrency(inputCurrencyId, chainId)
+  const outputCurrency = useCurrency(outputCurrencyId, chainId)
   const recipientLookup = useENS(recipient ?? undefined)
   const to: string | null = (recipient === null ? account : recipientLookup.address) ?? null
 
@@ -207,6 +207,8 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
     const valid = isAddress(urlParam)
     if (valid) return valid
     if (urlParam.toUpperCase() === 'MOVR') return 'MOVR'
+    if (urlParam.toUpperCase() === 'GLMR') return 'GLMR'
+    if (urlParam.toUpperCase() === 'DEV') return 'DEV'
     if (valid === false) return 'MOVR'
   }
   return 'MOVR' ?? ''

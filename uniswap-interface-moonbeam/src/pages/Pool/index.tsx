@@ -20,11 +20,12 @@ import { usePairs } from '../../data/Reserves'
 import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks'
 import AppBody from '../AppBody'
 import { Dots } from '../../components/swap/styleds'
+import { CURRENCY_LABELS } from '../../constants'
 
 export default function Pool() {
   const theme = useContext(ThemeContext)
   const { t } = useTranslation()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
@@ -60,7 +61,7 @@ export default function Pool() {
       <AppBody>
         <SwapPoolTabs active={'pool'} />
         <AutoColumn gap="lg" justify="center">
-          <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/add/MOVR">
+          <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to={`/add/${chainId ? CURRENCY_LABELS[chainId] : ''}`}>
             <Text fontWeight={500} fontSize={20}>
               {t('addLiquidity')}
             </Text>

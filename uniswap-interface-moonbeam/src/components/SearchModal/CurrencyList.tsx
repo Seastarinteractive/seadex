@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, MOVR, Token } from 'seadexswap-test-moonriver'
+import { Currency, CurrencyAmount, currencyEquals, MOVR, GLMR, DEV, Token } from 'seadexswap-test-moonriver'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -18,7 +18,7 @@ import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === MOVR ? 'MOVR' : ''
+  return currency instanceof Token ? currency.address : currency === MOVR ? 'MOVR' : currency === GLMR ? 'GLMR' : currency === DEV ? 'DEV' : ''
 }
 
 const StyledBalanceText = styled(Text)`
@@ -171,7 +171,8 @@ export default function CurrencyList({
   fixedListRef?: MutableRefObject<FixedSizeList | undefined>
   showETH: boolean
 }) {
-  const itemData = useMemo(() => (showETH ? [Currency.MOVR, ...currencies] : currencies), [currencies, showETH])
+  const { chainId } = useActiveWeb3React()
+  const itemData = useMemo(() => (showETH ? [chainId === 1284 ? Currency.GLMR : chainId === 1285 ? Currency.MOVR : Currency.DEV, ...currencies] : currencies), [currencies, showETH, chainId])
 
   const Row = useCallback(
     ({ data, index, style }) => {

@@ -1,4 +1,4 @@
-import { CurrencyAmount, MOVR, JSBI } from 'seadexswap-test-moonriver'
+import { CurrencyAmount, MOVR, GLMR, DEV, JSBI } from 'seadexswap-test-moonriver'
 import { MIN_ETH } from '../constants'
 
 /**
@@ -7,7 +7,7 @@ import { MIN_ETH } from '../constants'
  */
 export function maxAmountSpend(currencyAmount?: CurrencyAmount): CurrencyAmount | undefined {
   if (!currencyAmount) return undefined
-  if (currencyAmount.currency === MOVR) {
+  if (currencyAmount.currency === MOVR || currencyAmount.currency === GLMR || currencyAmount.currency === DEV) {
     if (JSBI.greaterThan(currencyAmount.raw, MIN_ETH)) {
       return CurrencyAmount.ether(JSBI.subtract(currencyAmount.raw, MIN_ETH))
     } else {
