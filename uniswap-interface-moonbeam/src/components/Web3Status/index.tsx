@@ -114,6 +114,14 @@ const Web3StatusAllowedNetworksList = styled(Web3StatusGeneric)`
   border: 1px solid ${({ theme }) => (theme.bg3)};
   color: ${({ theme }) => (theme.text1)};
   font-weight: 500;
+  :hover,
+  :focus {
+    background-color: ${({ theme }) => (lighten(0.05, theme.bg2))};
+
+    :focus {
+      border: 1px solid ${({ theme }) => (darken(0.1, theme.bg3))};
+    }
+  }
   display: none;
   position: absolute;
   top: 38px;
@@ -129,37 +137,38 @@ const Web3StatusNetworkItems = styled.div`
 const Web3StatusNetworkWrapper = styled.div <{ active?: boolean }>`
   height: 60px;
   cursor: pointer;
-  opacity: 0.75;
-  filter: alpha(opacity=75);
-  display: inline-block;
-  position: relative;
-  ::after{
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #fbb81b;
-    transform-origin: bottom center;
-    transition: transform 0.25s ease-out;
-  }
-  :hover{
-    opacity: 1;
-    filter: alpha(opacity=100);
-    transition: transform 0.25s ease-out;
-  }
-  :hover::after{
-    transform: scaleX(1);
-    transform-origin: bottom center;
-  }
-
+  ${({ active }) =>
+    !active &&
+    css`
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+    display: inline-block;
+    position: relative;
+    ::after{
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #fbb81b;
+      transform-origin: bottom center;
+      transition: transform 0.25s ease-out;
+    }
+    :hover{
+      opacity: 1;
+      filter: alpha(opacity=100);
+      transition: transform 0.25s ease-out;
+    }
+    :hover::after{
+      transform: scaleX(1);
+      transform-origin: bottom center;
+    }
+  `}
   ${({ active }) =>
     active &&
     css`
-    height: 60px;
-    cursor: pointer;
     border-bottom: 2px solid #fbb81b;
   `}
 `
@@ -262,7 +271,8 @@ function Web3StatusInner() {
   const hasSocks = useHasSocks()
   const toggleWalletModal = useWalletModalToggle()
 
-  const handleNetworkChange = async (id: number) => {
+  const handleNetworkChange = async (e: any, id: number) => {
+    e.stopPropagation()
     const hex = '0x' + id.toString(16);
     await (window as any).ethereum.request({
       method: 'wallet_switchEthereumChain',
@@ -286,10 +296,10 @@ function Web3StatusInner() {
         {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}
         <Web3StatusAllowedNetworksList id="allowed-networks-list" >
           <Web3StatusNetworkItems>
-            <Web3StatusNetworkWrapper active={chainId === 1284} onClick={() => handleNetworkChange(1284)}>
+            <Web3StatusNetworkWrapper active={chainId === 1284} onClick={(e) => handleNetworkChange(e, 1284)}>
               <MoonbeamLogo />
             </Web3StatusNetworkWrapper>
-            <Web3StatusNetworkWrapper active={chainId === 1285} onClick={() => handleNetworkChange(1285)}>
+            <Web3StatusNetworkWrapper active={chainId === 1285} onClick={(e) => handleNetworkChange(e, 1285)}>
               <MoonriverLogo />
             </Web3StatusNetworkWrapper>
           </Web3StatusNetworkItems>
@@ -303,10 +313,10 @@ function Web3StatusInner() {
         <Text>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error'}</Text>
         <Web3StatusAllowedNetworksList id="allowed-networks-list" >
           <Web3StatusNetworkItems>
-            <Web3StatusNetworkWrapper active={chainId === 1284} onClick={() => handleNetworkChange(1284)}>
+            <Web3StatusNetworkWrapper active={chainId === 1284} onClick={(e) => handleNetworkChange(e, 1284)}>
               <MoonbeamLogo />
             </Web3StatusNetworkWrapper>
-            <Web3StatusNetworkWrapper active={chainId === 1285} onClick={() => handleNetworkChange(1285)}>
+            <Web3StatusNetworkWrapper active={chainId === 1285} onClick={(e) => handleNetworkChange(e, 1285)}>
               <MoonriverLogo />
             </Web3StatusNetworkWrapper>
           </Web3StatusNetworkItems>
