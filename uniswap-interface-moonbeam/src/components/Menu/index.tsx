@@ -93,7 +93,7 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://dex.seascape.network/">
+          <MenuItem id="link" href="https://seascape.finance/">
             <Home size={14} />
             {t('Website')}
           </MenuItem>

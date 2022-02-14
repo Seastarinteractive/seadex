@@ -10,6 +10,7 @@ import { FixedHeightRow, HoverCard } from './index'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { useActiveWeb3React } from '../../hooks'
 import { ThemeContext } from 'styled-components'
+import { CURRENCY_LABELS, WRAPPED_CURRENCY_LABELS } from '../../constants'
 
 interface PositionCardProps extends RouteComponentProps<{}> {
   token: Token
@@ -28,7 +29,7 @@ function V1PositionCard({ token, V1LiquidityBalance }: PositionCardProps) {
           <RowFixed>
             <DoubleCurrencyLogo currency0={token} margin={true} size={20} />
             <Text fontWeight={500} fontSize={20} style={{ marginLeft: '' }}>
-              {`${chainId && token.equals(WMOVR[chainId]) ? 'WMOVR' : token.symbol}/MOVR`}
+              {`${chainId && token.equals(WMOVR[chainId]) ? WRAPPED_CURRENCY_LABELS[chainId] : token.symbol}/${chainId ? CURRENCY_LABELS[chainId] : ''}`}
             </Text>
             <Text
               fontSize={12}

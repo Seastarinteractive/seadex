@@ -11,6 +11,11 @@ import { AutoRow } from '../Row'
 const RowNoFlex = styled(AutoRow)`
   flex-wrap: nowrap;
 `
+const NETWORK_LABELS: { [chainId in number]: string } = {
+  1284: "Moonbeam",
+  1285: "Moonriver",
+  1287: 'Moonbase Alpha'
+}
 
 export default function TransactionPopup({
   hash,
@@ -33,7 +38,7 @@ export default function TransactionPopup({
       <AutoColumn gap="8px">
         <TYPE.body fontWeight={500}>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</TYPE.body>
         {chainId && (
-          <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>View on Moonbeam explorer</ExternalLink>
+          <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>{`View on ${NETWORK_LABELS[chainId]} explorer`}</ExternalLink>
         )}
       </AutoColumn>
     </RowNoFlex>
