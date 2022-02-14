@@ -21,10 +21,10 @@ export function isAddress(value: any): string | false {
 const DEVSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   1: '',
   1281: '',
-  1284: 'https://blockscout.moonbeam.network',
-  1285: 'https://blockscout.moonriver.moonbeam.network',
+  1284: 'https://moonbeam.moonscan.io',
+  1285: 'https://moonriver.moonscan.io',
   1286: '',
-  1287: 'https://moonbase-blockscout.testnet.moonbeam.network',
+  1287: 'https://moonbase.moonscan.io',
   1288: ''
 }
 
