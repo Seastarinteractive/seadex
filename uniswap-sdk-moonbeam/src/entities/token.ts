@@ -4,7 +4,7 @@ import { validateAndParseAddress } from '../utils'
 import { Currency } from './currency'
 import { WETH } from '../moonbase_address.json'
 import { WETH as moonriverWeth } from '../moonriver_address.json'
-
+import { WETH as moonbeamWeth } from '../moonbeam_address.json'
 /**
  * Represents an ERC20 token with a unique address and some metadata.
  */
@@ -37,8 +37,8 @@ export class Token extends Currency {
    * @throws if the tokens are on different chains
    */
   public sortsBefore(other: Token): boolean {
-    console.log("This chain: "+this.chainId+", other "+other.chainId);
-    console.log("This address: "+this.chainId+", address "+other.address);
+    console.log("This chain: " + this.chainId + ", other " + other.chainId);
+    console.log("This address: " + this.chainId + ", address " + other.address);
 
     invariant(this.chainId === other.chainId, 'CHAIN_IDS')
     invariant(this.address !== other.address, 'ADDRESSES')
@@ -79,5 +79,6 @@ export const WMOVR = {
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, moonriverWeth, 18, 'WMOVR', 'Wrapped MOVR'),
   [ChainId.MOONROCK]: new Token(ChainId.MOONROCK, WETH, 18, 'WMOVR', 'Wrapped MOVR'),
   [ChainId.MOONBASE]: new Token(ChainId.MOONBASE, WETH, 18, 'WMOVR', 'Wrapped MOVR'),
-  [ChainId.MOONSHADOW]: new Token(ChainId.MOONSHADOW, WETH, 18, 'WMOVR', 'Wrapped MOVR')
+  [ChainId.MOONSHADOW]: new Token(ChainId.MOONSHADOW, WETH, 18, 'WMOVR', 'Wrapped MOVR'),
+  [ChainId.MOONBEAM]: new Token(ChainId.MOONBEAM, moonbeamWeth, 18, 'WGLMR', 'Wrapped GLMR'),
 }

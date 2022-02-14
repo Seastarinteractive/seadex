@@ -17,7 +17,8 @@ export class Currency {
    * The only instance of the base class `Currency`.
    */
   public static readonly MOVR: Currency = new Currency(18, 'MOVR ', 'Moonriver')
-
+  public static readonly GLMR: Currency = new Currency(18, 'GLMR ', 'Glimmer')
+  public static readonly DEV: Currency = new Currency(18, 'DEV ', 'Dev')
   /**
    * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
    * @param decimals decimals of the currency
@@ -34,4 +35,6 @@ export class Currency {
 }
 
 const MOVR = Currency.MOVR
-export { MOVR }
+const GLMR = Currency.GLMR
+const DEV = Currency.DEV
+export { MOVR, GLMR, DEV }
