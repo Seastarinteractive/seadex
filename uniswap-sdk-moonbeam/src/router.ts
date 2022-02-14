@@ -1,7 +1,7 @@
 import { TradeType } from './constants'
 import invariant from 'tiny-invariant'
 import { validateAndParseAddress } from './utils'
-import { CurrencyAmount, MOVR, Percent, Trade } from './entities'
+import { CurrencyAmount, MOVR, GLMR, DEV, Percent, Trade } from './entities'
 
 /**
  * Options for producing the arguments to send call to the router.
@@ -67,15 +67,15 @@ export abstract class Router {
   /**
    * Cannot be constructed.
    */
-  private constructor() {}
+  private constructor() { }
   /**
    * Produces the on-chain method name to call and the hex encoded parameters to pass as arguments for a given trade.
    * @param trade to produce call parameters for
    * @param options options for the call parameters
    */
   public static swapCallParameters(trade: Trade, options: TradeOptions | TradeOptionsDeadline): SwapParameters {
-    const devIn = trade.inputAmount.currency === MOVR
-    const devOut = trade.outputAmount.currency === MOVR
+    const devIn = trade.inputAmount.currency === MOVR || trade.inputAmount.currency === GLMR || trade.inputAmount.currency === DEV
+    const devOut = trade.outputAmount.currency === MOVR || trade.outputAmount.currency === GLMR || trade.outputAmount.currency === DEV
     // the router does not support both ether in and out
     invariant(!(devIn && devOut), 'MOVR_IN_OUT')
     invariant(!('ttl' in options) || options.ttl > 0, 'TTL')
