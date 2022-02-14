@@ -47,11 +47,11 @@ import Loader from '../../components/Loader'
 export default function Swap() {
   const { t } = useTranslation()
   const loadedUrlParams = useDefaultsFromURLSearch()
-
+  const { chainId } = useActiveWeb3React()
   // token warning stuff
   const [loadedInputCurrency, loadedOutputCurrency] = [
-    useCurrency(loadedUrlParams?.inputCurrencyId),
-    useCurrency(loadedUrlParams?.outputCurrencyId)
+    useCurrency(loadedUrlParams?.inputCurrencyId, chainId),
+    useCurrency(loadedUrlParams?.outputCurrencyId, chainId)
   ]
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
@@ -90,18 +90,18 @@ export default function Swap() {
   const trade = showWrap
     ? undefined
     : {
-        [Version.v2]: v2Trade
-      }[toggledVersion]
+      [Version.v2]: v2Trade
+    }[toggledVersion]
 
   const parsedAmounts = showWrap
     ? {
-        [Field.INPUT]: parsedAmount,
-        [Field.OUTPUT]: parsedAmount
-      }
+      [Field.INPUT]: parsedAmount,
+      [Field.OUTPUT]: parsedAmount
+    }
     : {
-        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
-      }
+      [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+      [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
+    }
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
   const isValid = !swapInputError
@@ -192,8 +192,8 @@ export default function Swap() {
             recipient === null
               ? 'Swap w/o Send'
               : (recipientAddress ?? recipient) === account
-              ? 'Swap w/o Send + recipient'
-              : 'Swap w/ Send',
+                ? 'Swap w/o Send + recipient'
+                : 'Swap w/ Send',
           label: [trade?.inputAmount?.currency?.symbol, trade?.outputAmount?.currency?.symbol].join('/')
         })
       })
@@ -443,8 +443,8 @@ export default function Swap() {
                   {swapInputError
                     ? swapInputError
                     : priceImpactSeverity > 3 && !isExpertMode
-                    ? `Price Impact Too High`
-                    : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                      ? `Price Impact Too High`
+                      : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
                 </Text>
               </ButtonError>
             )}

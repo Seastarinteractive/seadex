@@ -1,7 +1,7 @@
-import { ChainId, Currency, CurrencyAmount, MOVR, Token, TokenAmount, WMOVR } from 'seadexswap'
+import { ChainId, Currency, CurrencyAmount, MOVR, GLMR, DEV, Token, TokenAmount, WMOVR } from 'seadexswap'
 
 export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {
-  return chainId && currency === MOVR ? WMOVR[chainId] : currency instanceof Token ? currency : undefined
+  return chainId && (currency === MOVR || currency === GLMR || currency === DEV) ? WMOVR[chainId] : currency instanceof Token ? currency : undefined
 }
 
 export function wrappedCurrencyAmount(
@@ -13,6 +13,14 @@ export function wrappedCurrencyAmount(
 }
 
 export function unwrappedToken(token: Token): Currency {
-  if (token.equals(WMOVR[token.chainId])) return MOVR
+  if (token.equals(WMOVR[token.chainId])) {
+    if (token.chainId === 1284) {
+      return GLMR;
+    } else if (token.chainId === 1285) {
+      return MOVR;
+    } else if (token.chainId === 1287) {
+      return DEV;
+    }
+  }
   return token
 }

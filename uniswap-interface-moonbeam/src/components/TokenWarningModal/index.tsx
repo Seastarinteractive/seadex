@@ -37,6 +37,12 @@ interface TokenWarningCardProps {
   token?: Token
 }
 
+const NETWORK_LABELS: { [chainId in number]: string } = {
+  1284: "Moonbeam",
+  1285: "Moonriver",
+  1287: 'Moonbase Alpha'
+}
+
 function TokenWarningCard({ token }: TokenWarningCardProps) {
   const { chainId } = useActiveWeb3React()
 
@@ -74,7 +80,7 @@ function TokenWarningCard({ token }: TokenWarningCardProps) {
           </TYPE.main>
           {chainId && (
             <ExternalLink style={{ fontWeight: 400 }} href={getEtherscanLink(chainId, token.address, 'token')}>
-              <TYPE.blue title={token.address}>{shortenAddress(token.address)} (View on Moonbeam explorer)</TYPE.blue>
+              <TYPE.blue title={token.address}>{shortenAddress(token.address)} {`(View on ${NETWORK_LABELS[chainId]} explorer)`}</TYPE.blue>
             </ExternalLink>
           )}
         </AutoColumn>

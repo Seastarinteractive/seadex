@@ -65,6 +65,12 @@ const Input = styled.input<{ error?: boolean }>`
   }
 `
 
+const NETWORK_LABELS: { [chainId in number]: string } = {
+  1284: "Moonbeam",
+  1285: "Moonriver",
+  1287: 'Moonbase Alpha'
+}
+
 export default function AddressInputPanel({
   id,
   value,
@@ -103,7 +109,7 @@ export default function AddressInputPanel({
               </TYPE.black>
               {address && chainId && (
                 <ExternalLink href={getEtherscanLink(chainId, name ?? address, 'address')} style={{ fontSize: '14px' }}>
-                  (View on Moonbeam explorer)
+                  {`(View on ${NETWORK_LABELS[chainId]} explorer)`}
                 </ExternalLink>
               )}
             </RowBetween>

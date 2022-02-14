@@ -31,7 +31,7 @@ const ConfirmedIcon = styled(ColumnCenter)`
   padding: 60px 0;
 `
 
-const CustomLightSpinner = styled(Spinner)<{ size: string }>`
+const CustomLightSpinner = styled(Spinner) <{ size: string }>`
   height: ${({ size }) => size};
   width: ${({ size }) => size};
 `
@@ -65,6 +65,12 @@ function ConfirmationPendingContent({ onDismiss, pendingText }: { onDismiss: () 
   )
 }
 
+const NETWORK_LABELS: { [chainId in number]: string } = {
+  1284: "Moonbeam",
+  1285: "Moonriver",
+  1287: 'Moonbase Alpha'
+}
+
 function TransactionSubmittedContent({
   onDismiss,
   chainId,
@@ -94,7 +100,7 @@ function TransactionSubmittedContent({
           {chainId && hash && (
             <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>
               <Text fontWeight={500} fontSize={14} color={theme.primary1}>
-                View on Moonbeam explorer
+                {`View on ${NETWORK_LABELS[chainId]} explorer`}
               </Text>
             </ExternalLink>
           )}

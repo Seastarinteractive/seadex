@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, MOVR, TokenAmount, WMOVR } from 'seadexswap'
+import { Currency, currencyEquals, MOVR, GLMR, DEV, TokenAmount, WMOVR } from 'seadexswap'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -17,7 +17,7 @@ import { AddRemoveTabs } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
 import Row, { RowBetween, RowFlat } from '../../components/Row'
 
-import { ROUTER_ADDRESS } from '../../constants'
+import { CURRENCY_LABELS, ROUTER_ADDRESS } from '../../constants'
 import { PairState } from '../../data/Reserves'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
@@ -47,13 +47,13 @@ export default function AddLiquidity({
   const { account, chainId, library } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
 
-  const currencyA = useCurrency(currencyIdA)
-  const currencyB = useCurrency(currencyIdB)
+  const currencyA = useCurrency(currencyIdA, chainId)
+  const currencyB = useCurrency(currencyIdB, chainId)
 
   const oneCurrencyIsWDEV = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(currencyA, WMOVR[chainId])) ||
-        (currencyB && currencyEquals(currencyB, WMOVR[chainId])))
+    ((currencyA && currencyEquals(currencyA, WMOVR[chainId])) ||
+      (currencyB && currencyEquals(currencyB, WMOVR[chainId])))
   )
 
   const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
@@ -147,8 +147,8 @@ export default function AddLiquidity({
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null
-    if (currencyA === MOVR || currencyB === MOVR) {
-      const tokenBIsETH = currencyB === MOVR
+    if (currencyA === MOVR || currencyA === GLMR || currencyA === DEV || currencyB === MOVR || currencyB === GLMR || currencyB === DEV) {
+      const tokenBIsETH = currencyB === MOVR || currencyB === GLMR || currencyB === DEV
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
       args = [
@@ -269,9 +269,8 @@ export default function AddLiquidity({
     )
   }
 
-  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-    currencies[Field.CURRENCY_A]?.symbol
-  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
+  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencies[Field.CURRENCY_A]?.symbol
+    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
@@ -294,10 +293,10 @@ export default function AddLiquidity({
           history.push(`/add/${newCurrencyIdB}`)
         }
       } else {
-        history.push(`/add/${currencyIdA ? currencyIdA : 'MOVR'}/${newCurrencyIdB}`)
+        history.push(`/add/${currencyIdA ? currencyIdA : chainId && CURRENCY_LABELS[chainId]}/${newCurrencyIdB}`)
       }
     },
-    [currencyIdA, history, currencyIdB]
+    [currencyIdA, history, currencyIdB, chainId]
   )
 
   const handleDismissConfirmation = useCallback(() => {

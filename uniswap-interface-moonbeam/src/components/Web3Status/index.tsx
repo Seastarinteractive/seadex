@@ -25,6 +25,9 @@ import Loader from '../Loader'
 import { RowBetween } from '../Row'
 import WalletModal from '../WalletModal'
 
+import MoonbeamIcon from '../../assets/images/chains/MOONBEAM.svg'
+import MoonriverIcon from '../../assets/images/chains/MOONRIVER.svg'
+
 const IconWrapper = styled.div<{ size?: number }>`
   ${({ theme }) => theme.flexColumnNoWrap};
   align-items: center;
@@ -56,9 +59,12 @@ const Web3StatusError = styled(Web3StatusGeneric)`
   :focus {
     background-color: ${({ theme }) => darken(0.1, theme.red1)};
   }
+  :hover #allowed-networks-list {
+    display: block;
+  }
 `
 
-const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
+const Web3StatusConnect = styled(Web3StatusGeneric) <{ faded?: boolean }>`
   background-color: ${({ theme }) => theme.primary4};
   border: none;
   color: ${({ theme }) => theme.primaryText1};
@@ -85,7 +91,7 @@ const Web3StatusConnect = styled(Web3StatusGeneric)<{ faded?: boolean }>`
     `}
 `
 
-const Web3StatusConnected = styled(Web3StatusGeneric)<{ pending?: boolean }>`
+const Web3StatusConnected = styled(Web3StatusGeneric) <{ pending?: boolean }>`
   background-color: ${({ pending, theme }) => (pending ? theme.primary1 : theme.bg2)};
   border: 1px solid ${({ pending, theme }) => (pending ? theme.primary1 : theme.bg3)};
   color: ${({ pending, theme }) => (pending ? theme.white : theme.text1)};
@@ -98,6 +104,91 @@ const Web3StatusConnected = styled(Web3StatusGeneric)<{ pending?: boolean }>`
       border: 1px solid ${({ pending, theme }) => (pending ? darken(0.1, theme.primary1) : darken(0.1, theme.bg3))};
     }
   }
+  :hover #allowed-networks-list {
+    display: block;
+  }
+`
+
+const Web3StatusAllowedNetworksList = styled(Web3StatusGeneric)`
+  background-color: ${({ theme }) => (theme.bg2)};
+  border: 1px solid ${({ theme }) => (theme.bg3)};
+  color: ${({ theme }) => (theme.text1)};
+  font-weight: 500;
+  :hover,
+  :focus {
+    background-color: ${({ theme }) => (lighten(0.05, theme.bg2))};
+
+    :focus {
+      border: 1px solid ${({ theme }) => (darken(0.1, theme.bg3))};
+    }
+  }
+  display: none;
+  position: absolute;
+  top: 38px;
+  width: inherit;
+`
+const Web3StatusNetworkItems = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+`
+
+const Web3StatusNetworkWrapper = styled.div <{ active?: boolean }>`
+  height: 60px;
+  cursor: pointer;
+  ${({ active }) =>
+    !active &&
+    css`
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+    display: inline-block;
+    position: relative;
+    ::after{
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #fbb81b;
+      transform-origin: bottom center;
+      transition: transform 0.25s ease-out;
+    }
+    :hover{
+      opacity: 1;
+      filter: alpha(opacity=100);
+      transition: transform 0.25s ease-out;
+    }
+    :hover::after{
+      transform: scaleX(1);
+      transform-origin: bottom center;
+    }
+  `}
+  ${({ active }) =>
+    active &&
+    css`
+    border-bottom: 2px solid #fbb81b;
+  `}
+`
+
+const MoonbeamLogo = styled.div`
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url(${MoonbeamIcon});
+  width: 50px;
+  height: 42px;
+`
+
+const MoonriverLogo = styled.div`
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url(${MoonriverIcon});
+  width: 33px;
+  height: 42px;
 `
 
 const Text = styled.p`
@@ -163,7 +254,7 @@ function StatusIcon({ connector }: { connector: AbstractConnector }) {
 
 function Web3StatusInner() {
   const { t } = useTranslation()
-  const { account, connector, error } = useWeb3React()
+  const { account, connector, error, chainId } = useWeb3React()
 
   const { ENSName } = useENSName(account ?? undefined)
 
@@ -180,6 +271,15 @@ function Web3StatusInner() {
   const hasSocks = useHasSocks()
   const toggleWalletModal = useWalletModalToggle()
 
+  const handleNetworkChange = async (e: any, id: number) => {
+    e.stopPropagation()
+    const hex = '0x' + id.toString(16);
+    await (window as any).ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: hex }]
+    });
+  }
+
   if (account) {
     return (
       <Web3StatusConnected id="web3-status-connected" onClick={toggleWalletModal} pending={hasPendingTransactions}>
@@ -194,6 +294,16 @@ function Web3StatusInner() {
           </>
         )}
         {!hasPendingTransactions && connector && <StatusIcon connector={connector} />}
+        <Web3StatusAllowedNetworksList id="allowed-networks-list" >
+          <Web3StatusNetworkItems>
+            <Web3StatusNetworkWrapper active={chainId === 1284} onClick={(e) => handleNetworkChange(e, 1284)}>
+              <MoonbeamLogo />
+            </Web3StatusNetworkWrapper>
+            <Web3StatusNetworkWrapper active={chainId === 1285} onClick={(e) => handleNetworkChange(e, 1285)}>
+              <MoonriverLogo />
+            </Web3StatusNetworkWrapper>
+          </Web3StatusNetworkItems>
+        </Web3StatusAllowedNetworksList>
       </Web3StatusConnected>
     )
   } else if (error) {
@@ -201,6 +311,16 @@ function Web3StatusInner() {
       <Web3StatusError onClick={toggleWalletModal}>
         <NetworkIcon />
         <Text>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error'}</Text>
+        <Web3StatusAllowedNetworksList id="allowed-networks-list" >
+          <Web3StatusNetworkItems>
+            <Web3StatusNetworkWrapper active={chainId === 1284} onClick={(e) => handleNetworkChange(e, 1284)}>
+              <MoonbeamLogo />
+            </Web3StatusNetworkWrapper>
+            <Web3StatusNetworkWrapper active={chainId === 1285} onClick={(e) => handleNetworkChange(e, 1285)}>
+              <MoonriverLogo />
+            </Web3StatusNetworkWrapper>
+          </Web3StatusNetworkItems>
+        </Web3StatusAllowedNetworksList>
       </Web3StatusError>
     )
   } else {

@@ -2,15 +2,63 @@
   "name": "Seadex Menu",
   "logoURI": "https://raw.githubusercontent.com/PureStake/moonbase-mintableERC20/main/mintableERC20-interface/public/logos/White_Icon.svg",
   "keywords": ["moonbase", "tokens", "uniswap", "seadex", "seascape"],
-  "timestamp": "2021-08-10T00:00:00+00:00",
+  "timestamp": "2022-02-01T00:00:00+00:00",
   "tokens": [
+    {
+      "address": "0x1aBB8FdE5e64be3419FceF80df335C68dD2956C7",
+      "chainId": 1284,
+      "name": "Crowns",
+      "symbol": "CWS",
+      "decimals": 18,
+      "logoURI": "https://cdn.seascape.network/currencies/cws.svg"
+    },
+    {
+      "address": "0xB60590313975f0d98821B6Cab5Ea2a6d9641D7B6",
+      "chainId": 1284,
+      "name": "Moonscape",
+      "symbol": "MSCP",
+      "decimals": 18,
+      "logoURI": "https://cdn.seascape.network/currencies/mscp.png"
+    },
+    {
+      "address": "0x4bDE98731149093a12579D71338fd3741fe6E5Ce",
+      "chainId": 1284,
+      "name": "RiverBoat",
+      "symbol": "RIB",
+      "decimals": 18,
+      "logoURI": "https://cdn.seascape.network/currencies/rib2.png"
+    },
+    {
+      "address": "0x6fc9651f45B262AE6338a701D563Ab118B1eC0Ce",
+      "chainId": 1285,
+      "name": "Crowns",
+      "symbol": "CWS",
+      "decimals": 18,
+      "logoURI": "https://cdn.seascape.network/currencies/cws.svg"
+    },
+    {
+      "address": "0x5c22ba65F65ADfFADFc0947382f2E7C286A0Fe45",
+      "chainId": 1285,
+      "name": "Moonscape",
+      "symbol": "MSCP",
+      "decimals": 18,
+      "logoURI": "https://cdn.seascape.network/currencies/mscp.png"
+    },
     {
       "address": "0xbD90A6125a84E5C512129D622a75CDDE176aDE5E",
       "chainId": 1285,
       "name": "RiverBoat",
       "symbol": "RIB",
       "decimals": 18,
-      "logoURI": "https://cdn.seascape.network/currencies/rib.png"
+      "logoURI": "https://cdn.seascape.network/currencies/rib2.png"
+    },
+    {
+      "address": "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d",
+      "chainId": 1285,
+      "name": "USD Coin (USDC)",
+      "symbol": "USDC",
+      "decimals": 6,
+      "logoURI": "https://cdn.seascape.network/currencies/usdc.png"
     },
     {
       "address": "0x412898253E0dDc1af9D81740615BfefeF7b3BdAD",
