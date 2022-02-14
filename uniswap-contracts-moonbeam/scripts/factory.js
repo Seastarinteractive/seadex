@@ -1,7 +1,8 @@
 const { ethers } = require('hardhat');
 
 // Pool creator on Seadex: factory
-const address = "0xD184B1317125b166f01e8a0d6088ce1de61D00BA";  // moonriver
+// const address = "0xD184B1317125b166f01e8a0d6088ce1de61D00BA";  // moonriver
+const address = "0x0D987781cc9D592e606a610130681D6Ecb816EC7";  // moonbeam
 
 // Deploy function
 async function info() {
