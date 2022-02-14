@@ -1,6 +1,6 @@
 import { MaxUint256 } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Trade, TokenAmount, CurrencyAmount, MOVR, GLMR, DEV } from 'seadexswap-test-moonriver'
+import { Trade, TokenAmount, CurrencyAmount, MOVR, GLMR, DEV } from 'seadexswap'
 import { useCallback, useMemo } from 'react'
 import { ROUTER_ADDRESS } from '../constants'
 import { useTokenAllowance } from '../data/Allowances'

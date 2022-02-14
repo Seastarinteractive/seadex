@@ -1,4 +1,4 @@
-import { ChainId } from 'seadexswap-test-moonriver'
+import { ChainId } from 'seadexswap'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { Text } from 'rebass'

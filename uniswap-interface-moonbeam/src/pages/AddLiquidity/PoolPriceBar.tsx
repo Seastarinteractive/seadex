@@ -1,4 +1,4 @@
-import { Currency, Percent, Price } from 'seadexswap-test-moonriver'
+import { Currency, Percent, Price } from 'seadexswap'
 import React, { useContext } from 'react'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'

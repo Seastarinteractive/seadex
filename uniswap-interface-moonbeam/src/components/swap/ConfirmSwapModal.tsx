@@ -1,4 +1,4 @@
-import { currencyEquals, Trade } from 'seadexswap-test-moonriver'
+import { currencyEquals, Trade } from 'seadexswap'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,

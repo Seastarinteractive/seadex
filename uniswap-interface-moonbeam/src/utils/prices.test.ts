@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Pair, Route, Token, TokenAmount, Trade, TradeType } from 'seadexswap-test-moonriver'
+import { ChainId, JSBI, Pair, Route, Token, TokenAmount, Trade, TradeType } from 'seadexswap'
 import { computeTradePriceBreakdown } from './prices'
 
 describe('prices', () => {

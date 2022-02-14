@@ -1,4 +1,4 @@
-import { Currency, MOVR, GLMR, DEV, Token } from 'seadexswap-test-moonriver'
+import { Currency, MOVR, GLMR, DEV, Token } from 'seadexswap'
 
 export function currencyId(currency: Currency): string {
   if (currency === MOVR) return 'MOVR'

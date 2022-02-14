@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, MOVR, GLMR, DEV, WMOVR } from 'seadexswap-test-moonriver'
+import { Currency, currencyEquals, MOVR, GLMR, DEV, WMOVR } from 'seadexswap'
 import { useMemo } from 'react'
 import { tryParseAmount } from '../state/swap/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'

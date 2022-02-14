@@ -1,4 +1,4 @@
-import { Trade, TradeType } from 'seadexswap-test-moonriver'
+import { Trade, TradeType } from 'seadexswap'
 import React, { useContext, useMemo, useState } from 'react'
 import { Repeat } from 'react-feather'
 import { Text } from 'rebass'

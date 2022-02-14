@@ -1,5 +1,5 @@
 import { parseBytes32String } from '@ethersproject/strings'
-import { Currency, MOVR, GLMR, DEV, Token, currencyEquals, ChainId } from 'seadexswap-test-moonriver'
+import { Currency, MOVR, GLMR, DEV, Token, currencyEquals, ChainId } from 'seadexswap'
 import { useMemo } from 'react'
 import { useSelectedTokenList } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'

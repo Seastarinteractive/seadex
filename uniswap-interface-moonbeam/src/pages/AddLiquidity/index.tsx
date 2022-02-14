@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, MOVR, GLMR, DEV, TokenAmount, WMOVR } from 'seadexswap-test-moonriver'
+import { Currency, currencyEquals, MOVR, GLMR, DEV, TokenAmount, WMOVR } from 'seadexswap'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'

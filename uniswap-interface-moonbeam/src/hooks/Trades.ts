@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Pair, Token, Trade } from 'seadexswap-test-moonriver'
+import { Currency, CurrencyAmount, Pair, Token, Trade } from 'seadexswap'
 import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
 

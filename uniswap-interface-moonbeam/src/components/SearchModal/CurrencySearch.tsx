@@ -1,4 +1,4 @@
-import { Currency, MOVR, GLMR, DEV, Token } from 'seadexswap-test-moonriver'
+import { Currency, MOVR, GLMR, DEV, Token } from 'seadexswap'
 import React, { KeyboardEvent, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import ReactGA from 'react-ga'
 import { useTranslation } from 'react-i18next'

@@ -1,4 +1,4 @@
-import { JSBI, Pair, Percent } from 'seadexswap-test-moonriver'
+import { JSBI, Pair, Percent } from 'seadexswap'
 import { darken } from 'polished'
 import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'

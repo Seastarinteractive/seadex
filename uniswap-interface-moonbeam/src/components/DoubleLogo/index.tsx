@@ -1,4 +1,4 @@
-import { Currency } from 'seadexswap-test-moonriver'
+import { Currency } from 'seadexswap'
 import React from 'react'
 import styled from 'styled-components'
 import CurrencyLogo from '../CurrencyLogo'

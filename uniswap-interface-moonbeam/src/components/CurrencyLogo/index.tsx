@@ -1,4 +1,4 @@
-import { Currency, MOVR, GLMR, DEV, Token } from 'seadexswap-test-moonriver'
+import { Currency, MOVR, GLMR, DEV, Token } from 'seadexswap'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 

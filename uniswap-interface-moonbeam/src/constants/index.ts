@@ -1,4 +1,4 @@
-import { ChainId, Currency, JSBI, Percent, Token, WMOVR } from 'seadexswap-test-moonriver'
+import { ChainId, Currency, JSBI, Percent, Token, WMOVR } from 'seadexswap'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { routerv2 } from '../moonbase_address.json'
 import { routerv2 as riverRouterV2 } from '../moonriver_address.json'

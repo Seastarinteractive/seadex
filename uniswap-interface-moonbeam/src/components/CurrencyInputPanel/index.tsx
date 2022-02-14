@@ -1,4 +1,4 @@
-import { Currency, Pair } from 'seadexswap-test-moonriver'
+import { Currency, Pair } from 'seadexswap'
 import React, { useState, useContext, useCallback } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { darken } from 'polished'

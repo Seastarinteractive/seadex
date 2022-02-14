@@ -1,4 +1,4 @@
-import { ChainId } from 'seadexswap-test-moonriver'
+import { ChainId } from 'seadexswap'
 import MULTICALL_ABI from './abi.json'
 import { multicall } from '../../moonbase_address.json'
 import { multicall as riverMulticall } from '../../moonriver_address.json'

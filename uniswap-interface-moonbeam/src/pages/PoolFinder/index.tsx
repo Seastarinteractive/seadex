@@ -1,4 +1,4 @@
-import { Currency, JSBI, TokenAmount } from 'seadexswap-test-moonriver'
+import { Currency, JSBI, TokenAmount } from 'seadexswap'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Plus } from 'react-feather'
 import { Text } from 'rebass'

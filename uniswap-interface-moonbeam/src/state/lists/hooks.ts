@@ -1,4 +1,4 @@
-import { ChainId, Token } from 'seadexswap-test-moonriver'
+import { ChainId, Token } from 'seadexswap'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
