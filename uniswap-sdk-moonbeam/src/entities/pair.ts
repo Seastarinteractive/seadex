@@ -9,6 +9,8 @@ import {
   BigintIsh,
   FACTORY_ADDRESS,
   INIT_CODE_HASH,
+  INIT_CODE_HASH_MOONBASE,
+  INIT_CODE_HASH_MOONBEAM,
   MINIMUM_LIQUIDITY,
   ZERO,
   ONE,
@@ -30,6 +32,17 @@ export class Pair {
   public static getAddress(tokenA: Token, tokenB: Token): string {
     const tokens = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
 
+    let initCodeHash = INIT_CODE_HASH;
+    if (tokenA.chainId === ChainId.MOONRIVER) {
+      initCodeHash = INIT_CODE_HASH;
+    } else if (tokenA.chainId === ChainId.MOONBASE) {
+      initCodeHash = INIT_CODE_HASH_MOONBASE;
+    } else if (tokenA.chainId === ChainId.MOONBEAM) {
+      initCodeHash = INIT_CODE_HASH_MOONBEAM;
+    } else {
+      console.error('unsupported chain for init_code_hash')
+    }
+
     if (PAIR_ADDRESS_CACHE?.[tokens[0].address]?.[tokens[1].address] === undefined) {
       PAIR_ADDRESS_CACHE = {
         ...PAIR_ADDRESS_CACHE,
@@ -38,7 +51,7 @@ export class Pair {
           [tokens[1].address]: getCreate2Address(
             FACTORY_ADDRESS[tokens[0].chainId],
             keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-            INIT_CODE_HASH
+            initCodeHash
           )
         }
       }
