@@ -1,4 +1,4 @@
-import { Trade, TradeType } from 'seadexswap'
+import { TokenAmount, Trade, TradeType } from 'seadexswap'
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { Field } from '../../state/swap/actions'
@@ -11,12 +11,36 @@ import { RowBetween, RowFixed } from '../Row'
 import FormattedPriceImpact from './FormattedPriceImpact'
 import { SectionBreak } from './styleds'
 import SwapRoute from './SwapRoute'
+import { useActiveWeb3React } from '../../hooks'
 
 function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippage: number }) {
   const theme = useContext(ThemeContext)
   const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(trade)
   const isExactIn = trade.tradeType === TradeType.EXACT_INPUT
   const slippageAdjustedAmounts = computeSlippageAdjustedAmounts(trade, allowedSlippage)
+
+  const { chainId } = useActiveWeb3React();
+  let inputAmountCurrencySymbol = trade.inputAmount.currency.symbol;
+  if (!(trade.inputAmount instanceof TokenAmount)) {
+    if (chainId === 1284) {
+      inputAmountCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      inputAmountCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      inputAmountCurrencySymbol = 'DEV'
+    }
+  }
+
+  let outputAmountCurrencySymbol = trade.outputAmount.currency.symbol;
+  if (!(trade.outputAmount instanceof TokenAmount)) {
+    if (chainId === 1284) {
+      outputAmountCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      outputAmountCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      outputAmountCurrencySymbol = 'DEV'
+    }
+  }
 
   return (
     <>
@@ -31,9 +55,9 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
           <RowFixed>
             <TYPE.black color={theme.text1} fontSize={14}>
               {isExactIn
-                ? `${slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4)} ${trade.outputAmount.currency.symbol}` ??
+                ? `${slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(4)} ${outputAmountCurrencySymbol}` ??
                 '-'
-                : `${slippageAdjustedAmounts[Field.INPUT]?.toSignificant(4)} ${trade.inputAmount.currency.symbol}` ??
+                : `${slippageAdjustedAmounts[Field.INPUT]?.toSignificant(4)} ${inputAmountCurrencySymbol}` ??
                 '-'}
             </TYPE.black>
           </RowFixed>
@@ -56,7 +80,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
             <QuestionHelper text="A portion of each trade (0.30%) goes to liquidity providers as a protocol incentive." />
           </RowFixed>
           <TYPE.black fontSize={14} color={theme.text1}>
-            {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
+            {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${inputAmountCurrencySymbol}` : '-'}
           </TYPE.black>
         </RowBetween>
       </AutoColumn>

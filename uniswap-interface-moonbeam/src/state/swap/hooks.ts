@@ -190,7 +190,17 @@ export function useDerivedSwapInfo(): {
   ]
 
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
-    inputError = 'Insufficient ' + amountIn.currency.symbol + ' balance'
+    let amountInCurrencySymbol = amountIn.currency.symbol;
+    if (!(amountIn instanceof TokenAmount)) {
+      if (chainId === 1284) {
+        amountInCurrencySymbol = 'GLMR'
+      } else if (chainId === 1285) {
+        amountInCurrencySymbol = 'MOVR'
+      } else if (chainId === 1287) {
+        amountInCurrencySymbol = 'DEV'
+      }
+    }
+    inputError = 'Insufficient ' + amountInCurrencySymbol + ' balance'
   }
 
   return {

@@ -5,6 +5,8 @@ import { Repeat } from 'react-feather'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'
 import { StyledBalanceMaxMini } from './styleds'
+import { useActiveWeb3React } from '../../hooks'
+import { WrappedTokenInfo } from '../../state/lists/hooks'
 
 interface TradePriceProps {
   price?: Price
@@ -15,12 +17,35 @@ interface TradePriceProps {
 export default function TradePrice({ price, showInverted, setShowInverted }: TradePriceProps) {
   const theme = useContext(ThemeContext)
 
+  const { chainId } = useActiveWeb3React();
+  let baseCurrencySymbol = price?.baseCurrency?.symbol;
+  if (!(price?.baseCurrency instanceof WrappedTokenInfo)) {
+    if (chainId === 1284) {
+      baseCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      baseCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      baseCurrencySymbol = 'DEV'
+    }
+  }
+
+  let quoteCurrencySymbol = price?.quoteCurrency?.symbol;
+  if (!(price?.quoteCurrency instanceof WrappedTokenInfo)) {
+    if (chainId === 1284) {
+      quoteCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      quoteCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      quoteCurrencySymbol = 'DEV'
+    }
+  }
+
   const formattedPrice = showInverted ? price?.toSignificant(6) : price?.invert()?.toSignificant(6)
 
   const show = Boolean(price?.baseCurrency && price?.quoteCurrency)
   const label = showInverted
-    ? `${price?.quoteCurrency?.symbol} per ${price?.baseCurrency?.symbol}`
-    : `${price?.baseCurrency?.symbol} per ${price?.quoteCurrency?.symbol}`
+    ? `${quoteCurrencySymbol} per ${baseCurrencySymbol}`
+    : `${baseCurrencySymbol} per ${quoteCurrencySymbol}`
 
   return (
     <Text
