@@ -8,6 +8,7 @@ import { calculateGasMargin, getRouterContract, isAddress, shortenAddress } from
 import isZero from '../utils/isZero'
 import { useActiveWeb3React } from './index'
 import useENS from './useENS'
+import { WrappedTokenInfo } from '../state/lists/hooks'
 
 export enum SwapCallbackState {
   INVALID,
@@ -181,8 +182,26 @@ export function useSwapCallback(
           ...(value && !isZero(value) ? { value, from: account } : { from: account })
         })
           .then((response: any) => {
-            const inputSymbol = trade.inputAmount.currency.symbol
-            const outputSymbol = trade.outputAmount.currency.symbol
+            let inputSymbol = trade.inputAmount.currency.symbol;
+            if (!(trade?.inputAmount?.currency instanceof WrappedTokenInfo)) {
+              if (chainId === 1284) {
+                inputSymbol = 'GLMR'
+              } else if (chainId === 1285) {
+                inputSymbol = 'MOVR'
+              } else if (chainId === 1287) {
+                inputSymbol = 'DEV'
+              }
+            }
+            let outputSymbol = trade.outputAmount.currency.symbol;
+            if (!(trade?.outputAmount?.currency instanceof WrappedTokenInfo)) {
+              if (chainId === 1284) {
+                outputSymbol = 'GLMR'
+              } else if (chainId === 1285) {
+                outputSymbol = 'MOVR'
+              } else if (chainId === 1287) {
+                outputSymbol = 'DEV'
+              }
+            }
             const inputAmount = trade.inputAmount.toSignificant(3)
             const outputAmount = trade.outputAmount.toSignificant(3)
 
