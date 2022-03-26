@@ -6,6 +6,8 @@ import TransactionConfirmationModal, {
 } from '../TransactionConfirmationModal'
 import SwapModalFooter from './SwapModalFooter'
 import SwapModalHeader from './SwapModalHeader'
+import { useActiveWeb3React } from '../../hooks'
+import { WrappedTokenInfo } from '../../state/lists/hooks'
 
 /**
  * Returns true if the trade requires a confirmation of details before we can submit it
@@ -47,6 +49,8 @@ export default function ConfirmSwapModal({
   swapErrorMessage: string | undefined
   onDismiss: () => void
 }) {
+  const { chainId } = useActiveWeb3React()
+
   const showAcceptChanges = useMemo(
     () => Boolean(trade && originalTrade && tradeMeaningfullyDiffers(trade, originalTrade)),
     [originalTrade, trade]
@@ -77,8 +81,30 @@ export default function ConfirmSwapModal({
   }, [allowedSlippage, onConfirm, showAcceptChanges, swapErrorMessage, trade])
 
   // text to show while loading
-  const pendingText = `Swapping ${trade?.inputAmount?.toSignificant(6)} ${trade?.inputAmount?.currency?.symbol
-    } for ${trade?.outputAmount?.toSignificant(6)} ${trade?.outputAmount?.currency?.symbol}`
+  let inputCurrencySymbol = trade?.inputAmount?.currency?.symbol;
+  if (!(trade?.inputAmount?.currency instanceof WrappedTokenInfo)) {
+    if (chainId === 1284) {
+      inputCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      inputCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      inputCurrencySymbol = 'DEV'
+    }
+  }
+
+  let outputCurrencySymbol = trade?.outputAmount?.currency?.symbol;
+  if (!(trade?.outputAmount?.currency instanceof WrappedTokenInfo)) {
+    if (chainId === 1284) {
+      outputCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      outputCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      outputCurrencySymbol = 'DEV'
+    }
+  }
+
+  const pendingText = `Swapping ${trade?.inputAmount?.toSignificant(6)} ${inputCurrencySymbol
+    } for ${trade?.outputAmount?.toSignificant(6)} ${outputCurrencySymbol}`
 
   const confirmationContent = useCallback(
     () =>

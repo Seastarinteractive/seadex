@@ -12,6 +12,8 @@ import { AutoColumn } from '../Column'
 import CurrencyLogo from '../CurrencyLogo'
 import { RowBetween, RowFixed } from '../Row'
 import { TruncatedText, SwapShowAcceptChanges } from './styleds'
+import { useActiveWeb3React } from '../../hooks'
+import { WrappedTokenInfo } from '../../state/lists/hooks'
 
 export default function SwapModalHeader({
   trade,
@@ -26,6 +28,7 @@ export default function SwapModalHeader({
   showAcceptChanges: boolean
   onAcceptChanges: () => void
 }) {
+  const { chainId } = useActiveWeb3React()
   const slippageAdjustedAmounts = useMemo(() => computeSlippageAdjustedAmounts(trade, allowedSlippage), [
     trade,
     allowedSlippage
@@ -34,6 +37,28 @@ export default function SwapModalHeader({
   const priceImpactSeverity = warningSeverity(priceImpactWithoutFee)
 
   const theme = useContext(ThemeContext)
+
+  let inputCurrencySymbol = trade.inputAmount.currency.symbol;
+  if (!(trade?.inputAmount?.currency instanceof WrappedTokenInfo)) {
+    if (chainId === 1284) {
+      inputCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      inputCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      inputCurrencySymbol = 'DEV'
+    }
+  }
+
+  let outputCurrencySymbol = trade.outputAmount.currency.symbol;
+  if (!(trade?.outputAmount?.currency instanceof WrappedTokenInfo)) {
+    if (chainId === 1284) {
+      outputCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      outputCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      outputCurrencySymbol = 'DEV'
+    }
+  }
 
   return (
     <AutoColumn gap={'md'} style={{ marginTop: '20px' }}>
@@ -50,7 +75,7 @@ export default function SwapModalHeader({
         </RowFixed>
         <RowFixed gap={'0px'}>
           <Text fontSize={24} fontWeight={500} style={{ marginLeft: '10px' }}>
-            {trade.inputAmount.currency.symbol}
+            {inputCurrencySymbol}
           </Text>
         </RowFixed>
       </RowBetween>
@@ -76,7 +101,7 @@ export default function SwapModalHeader({
         </RowFixed>
         <RowFixed gap={'0px'}>
           <Text fontSize={24} fontWeight={500} style={{ marginLeft: '10px' }}>
-            {trade.outputAmount.currency.symbol}
+            {outputCurrencySymbol}
           </Text>
         </RowFixed>
       </RowBetween>
@@ -101,7 +126,7 @@ export default function SwapModalHeader({
           <TYPE.italic textAlign="left" style={{ width: '100%' }}>
             {`Output is estimated. You will receive at least `}
             <b>
-              {slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(6)} {trade.outputAmount.currency.symbol}
+              {slippageAdjustedAmounts[Field.OUTPUT]?.toSignificant(6)} {outputCurrencySymbol}
             </b>
             {' or the transaction will revert.'}
           </TYPE.italic>
@@ -109,7 +134,7 @@ export default function SwapModalHeader({
           <TYPE.italic textAlign="left" style={{ width: '100%' }}>
             {`Input is estimated. You will sell at most `}
             <b>
-              {slippageAdjustedAmounts[Field.INPUT]?.toSignificant(6)} {trade.inputAmount.currency.symbol}
+              {slippageAdjustedAmounts[Field.INPUT]?.toSignificant(6)} {inputCurrencySymbol}
             </b>
             {' or the transaction will revert.'}
           </TYPE.italic>
