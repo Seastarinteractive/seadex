@@ -17,6 +17,8 @@ import QuestionHelper from '../QuestionHelper'
 import { AutoRow, RowBetween, RowFixed } from '../Row'
 import FormattedPriceImpact from './FormattedPriceImpact'
 import { StyledBalanceMaxMini, SwapCallbackError } from './styleds'
+import { useActiveWeb3React } from '../../hooks'
+import { WrappedTokenInfo } from '../../state/lists/hooks'
 
 export default function SwapModalFooter({
   trade,
@@ -31,6 +33,7 @@ export default function SwapModalFooter({
   swapErrorMessage: string | undefined
   disabledConfirm: boolean
 }) {
+  const { chainId } = useActiveWeb3React()
   const [showInverted, setShowInverted] = useState<boolean>(false)
   const theme = useContext(ThemeContext)
   const slippageAdjustedAmounts = useMemo(() => computeSlippageAdjustedAmounts(trade, allowedSlippage), [
@@ -39,6 +42,28 @@ export default function SwapModalFooter({
   ])
   const { priceImpactWithoutFee, realizedLPFee } = useMemo(() => computeTradePriceBreakdown(trade), [trade])
   const severity = warningSeverity(priceImpactWithoutFee)
+
+  let inputCurrencySymbol = trade.inputAmount.currency.symbol;
+  if (!(trade?.inputAmount?.currency instanceof WrappedTokenInfo)) {
+    if (chainId === 1284) {
+      inputCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      inputCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      inputCurrencySymbol = 'DEV'
+    }
+  }
+
+  let outputCurrencySymbol = trade.outputAmount.currency.symbol;
+  if (!(trade?.outputAmount?.currency instanceof WrappedTokenInfo)) {
+    if (chainId === 1284) {
+      outputCurrencySymbol = 'GLMR'
+    } else if (chainId === 1285) {
+      outputCurrencySymbol = 'MOVR'
+    } else if (chainId === 1287) {
+      outputCurrencySymbol = 'DEV'
+    }
+  }
 
   return (
     <>
@@ -59,7 +84,7 @@ export default function SwapModalFooter({
               paddingLeft: '10px'
             }}
           >
-            {formatExecutionPrice(trade, showInverted)}
+            {formatExecutionPrice(trade, showInverted, chainId)}
             <StyledBalanceMaxMini onClick={() => setShowInverted(!showInverted)}>
               <Repeat size={14} />
             </StyledBalanceMaxMini>
@@ -81,8 +106,8 @@ export default function SwapModalFooter({
             </TYPE.black>
             <TYPE.black fontSize={14} marginLeft={'4px'}>
               {trade.tradeType === TradeType.EXACT_INPUT
-                ? trade.outputAmount.currency.symbol
-                : trade.inputAmount.currency.symbol}
+                ? outputCurrencySymbol
+                : inputCurrencySymbol}
             </TYPE.black>
           </RowFixed>
         </RowBetween>
@@ -103,7 +128,7 @@ export default function SwapModalFooter({
             <QuestionHelper text="A portion of each trade (0.30%) goes to liquidity providers as a protocol incentive." />
           </RowFixed>
           <TYPE.black fontSize={14}>
-            {realizedLPFee ? realizedLPFee?.toSignificant(6) + ' ' + trade.inputAmount.currency.symbol : '-'}
+            {realizedLPFee ? realizedLPFee?.toSignificant(6) + ' ' + inputCurrencySymbol : '-'}
           </TYPE.black>
         </RowBetween>
       </AutoColumn>
