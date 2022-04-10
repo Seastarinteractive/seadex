@@ -29,6 +29,14 @@
       "logoURI": "https://cdn.seascape.network/currencies/rib2.png"
     },
     {
+      "address": "0x818ec0a7fe18ff94269904fced6ae3dae6d6dc0b",
+      "chainId": 1284,
+      "name": "USD Coin (USDC)",
+      "symbol": "USDC",
+      "decimals": 6,
+      "logoURI": "https://cdn.seascape.network/currencies/usdc.png"
+    },
+    {
       "address": "0x6fc9651f45B262AE6338a701D563Ab118B1eC0Ce",
       "chainId": 1285,
       "name": "Crowns",
