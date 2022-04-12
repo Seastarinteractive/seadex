@@ -213,7 +213,11 @@ export function useTrackedTokenPairs(): [Token, Token][] {
     if (!forChain) return []
 
     return Object.keys(forChain).map(pairId => {
-      return [deserializeToken(forChain[pairId].token0), deserializeToken(forChain[pairId].token1)]
+      const token0 = deserializeToken(forChain[pairId].token0);
+      const wrappedTokenInfo0 = tokens[token0.address];
+      const token1 = deserializeToken(forChain[pairId].token1);
+      const wrappedTokenInfo1 = tokens[token1.address];
+      return [wrappedTokenInfo0 ?? token0, wrappedTokenInfo1 ?? token1]
     })
   }, [savedSerializedPairs, chainId])
 
