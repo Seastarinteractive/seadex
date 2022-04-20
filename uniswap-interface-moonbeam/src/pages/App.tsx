@@ -19,6 +19,8 @@ import Swap from './Swap'
 import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
+import TermsOfReference from './TermsOfReference';
+import PrivacyPolicy from './PrivacyPolicy';
 
 // import NftBrawlIcon from '../assets/images/ad_icons/nft_brawl_icon.png'
 import ProfitCircusIcon from '../assets/images/ad_icons/profit_circus_icon.png'
@@ -190,6 +192,8 @@ export default function App() {
                 <Route exact path="/add/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
                 <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
                 <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
+                <Route exact strict path="/termsOfReference" component={TermsOfReference} />
+                <Route exact strict path="/privacyPolicy" component={PrivacyPolicy} />
                 <Route component={RedirectPathToSwapOnly} />
               </Switch>
             </Web3ReactManager>

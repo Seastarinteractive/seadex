@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { Code, MessageCircle, Home } from 'react-feather'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -79,6 +80,28 @@ const MenuItem = styled(ExternalLink)`
   }
 `
 
+const activeClassName = 'ACTIVE'
+
+const StyledNavLink = styled(NavLink).attrs({
+  activeClassName
+})`
+  flex: 1;
+  padding: 0.5rem 0.5rem;
+  color: ${({ theme }) => theme.text2};
+  text-decoration: none;
+  &.${activeClassName} {
+    color: ${({ theme }) => theme.text1};
+    text-decoration: none;
+  }
+
+  :hover,
+  :focus {
+    color: ${({ theme }) => theme.text1};
+    cursor: pointer;
+    text-decoration: none;
+  }
+`
+
 export default function Menu() {
   const node = useRef<HTMLDivElement>()
   const [open, toggle] = useToggle(false)
@@ -105,8 +128,15 @@ export default function Menu() {
             <Code size={14} />
             {t('code')}
           </MenuItem>
+          <StyledNavLink id={`termsOfReference-nav-link`} to={'/termsOfReference'}>
+            {t('Terms of Reference')}
+          </StyledNavLink>
+          <StyledNavLink id={`privacyPolicy-nav-link`} to={'/privacyPolicy'}>
+            {t('Privacy Policy')}
+          </StyledNavLink>
         </MenuFlyout>
-      )}
-    </StyledMenu>
+      )
+      }
+    </StyledMenu >
   )
 }
