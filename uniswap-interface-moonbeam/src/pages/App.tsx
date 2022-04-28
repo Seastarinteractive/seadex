@@ -23,12 +23,12 @@ import TermsOfReference from './TermsOfReference';
 import PrivacyPolicy from './PrivacyPolicy';
 
 // import NftBrawlIcon from '../assets/images/ad_icons/nft_brawl_icon.png'
-import ProfitCircusIcon from '../assets/images/ad_icons/profit_circus_icon.png'
+// import ProfitCircusIcon from '../assets/images/ad_icons/profit_circus_icon.png'
 import LighthouseIcon from '../assets/images/ad_icons/lighthouse_icon.png'
 import MoonscapeIcon from '../assets/images/ad_icons/moonscape_icon.png'
 
 // const nftBrawlURL = 'https://moonriver.seascape.network/index/product/nftbrawl.html'
-const profitCircusURL = 'https://moonriver.seascape.network/index/product/moonriver_circus.html'
+// const profitCircusURL = 'https://moonriver.seascape.network/index/product/moonriver_circus.html'
 const lighthouseURL = 'https://seascape.house/'
 const moonscapeURL = 'https://moonscapegame.com/'
 
@@ -103,34 +103,34 @@ const ADWrap = styled.div`
 //   }
 // `
 
-const ProfitCircusAD = styled.div`
-  height: 180px;
-  width: 170px;
-  margin: 20px 0 20px 0;
-  padding: 20px 10px;
-  display: flex;
-  align-items: flex-end;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url(${ProfitCircusIcon});
-  cursor: pointer;
-  @media (max-width: 900px) {
-    margin: 0 20px 0 20px;
-  }
-`
+// const ProfitCircusAD = styled.div`
+//   height: 180px;
+//   width: 170px;
+//   margin: 20px 0 20px 0;
+//   padding: 20px 10px;
+//   display: flex;
+//   align-items: flex-end;
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   background-image: url(${ProfitCircusIcon});
+//   cursor: pointer;
+//   @media (max-width: 900px) {
+//     margin: 0 20px 0 20px;
+//   }
+// `
 
-const APY = styled.div`
-  font-family: 'Carnivalee Freakshow', sans-serif;
-  font-size: 28px;
-  color: #FA8E48;
-  position: relative;
-  width: 98%;
-  height: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+// const APY = styled.div`
+//   font-family: 'Carnivalee Freakshow', sans-serif;
+//   font-size: 28px;
+//   color: #FA8E48;
+//   position: relative;
+//   width: 98%;
+//   height: 30%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `
 
 const LighthouseAD = styled.div`
   height: 180px;
@@ -200,9 +200,9 @@ export default function App() {
             <ADWrap>
               {/* <NftBrawlAD onClick={() => window.open(nftBrawlURL)} /> */}
               <MoonscapeAD onClick={() => window.open(moonscapeURL)} />
-              <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
+              {/* <ProfitCircusAD onClick={() => window.open(profitCircusURL)}>
                 <APY>Profit Circus</APY>
-              </ProfitCircusAD>
+              </ProfitCircusAD> */}
               <LighthouseAD onClick={() => window.open(lighthouseURL)} />
             </ADWrap>
             <Marginer />
