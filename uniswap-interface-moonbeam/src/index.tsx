@@ -16,15 +16,16 @@ import TransactionUpdater from './state/transactions/updater'
 import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
+import TagManager from 'react-gtm-module';
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 
 if ('ethereum' in window) {
   ; (window.ethereum as any).autoRefreshOnNetworkChange = false
 }
-const GOOGLE_ANALYTICS_ID = 'UA-227851748-2'
-// const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
-console.log('from config: ', process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
+
+const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
+
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   ReactGA.initialize(GOOGLE_ANALYTICS_ID)
   ReactGA.set({
@@ -32,6 +33,12 @@ if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   })
 } else {
   ReactGA.initialize('test', { testMode: true, debug: true })
+}
+
+console.log(process.env.REACT_APP_GTM_ID)
+if (process.env.REACT_APP_GTM_ID) {
+  console.log('tagmanager')
+  TagManager.initialize({ gtmId: process.env.REACT_APP_GTM_ID });
 }
 
 window.addEventListener('error', error => {
