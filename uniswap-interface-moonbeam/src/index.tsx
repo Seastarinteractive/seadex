@@ -35,9 +35,7 @@ if (typeof GOOGLE_ANALYTICS_ID === 'string') {
   ReactGA.initialize('test', { testMode: true, debug: true })
 }
 
-console.log(process.env.REACT_APP_GTM_ID)
 if (process.env.REACT_APP_GTM_ID) {
-  console.log('tagmanager')
   TagManager.initialize({ gtmId: process.env.REACT_APP_GTM_ID });
 }
 
