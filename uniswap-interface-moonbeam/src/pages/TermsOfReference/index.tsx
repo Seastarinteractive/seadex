@@ -32,7 +32,7 @@ export default function TermsOfReference() {
         <TermAndPolicyCard title={'1. General'} description={<>
           These terms and conditions (“<strong>Terms</strong>”) govern the use of the Website (defined below)
           and the Services (defined below). These Terms also include any guidelines, announcements, additional terms, policies, and disclaimers made available or
-          issued by us from time to time. These Terms constitute a binding and enforceable legal contract between Seastar Interactive Limited [C1] and
+          issued by us from time to time. These Terms constitute a binding and enforceable legal contract between Seastar Interactive Limited and
           its affiliates (“<strong>Company</strong>”, “<strong>Seadex</strong>”, “<strong>we</strong>”, “<strong>us</strong>”) and you, an end user of the services
           (“<strong>you</strong>” or “<strong>User</strong>”) at <a href='https://seascape.finance/#/swap' style={{ color: 'white' }}>https://seascape.finance/#/swap</a> (“<strong>Services</strong>”). By accessing, using or clicking
           on our website (and all related subdomains) or its mobile applications (“<strong>Website</strong>”) or accessing, using or attempting to use the Services,
@@ -180,10 +180,9 @@ export default function TermsOfReference() {
         </>}
         />
         <TermAndPolicyCard title={'12. Jurisdiction and Governing Law'} description={<>
-          The parties shall attempt in good faith to mutually resolve any and all disputes, whether of law or fact, and of any nature whatsoever arising from or with respect to these Terms. These Terms and any dispute or claim arising out of or in connection with the Services or the Website shall be governed by, and construed in accordance with, the laws of the Singapore
+          The parties shall attempt in good faith to mutually resolve any and all disputes, whether of law or fact, and of any nature whatsoever arising from or with respect to these Terms. These Terms and any dispute or claim arising out of or in connection with the Services or the Website shall be governed by, and construed in accordance with, the laws of the British Virgin Islands.
           <br />
           <br />
-          [C3]
           <br />
           Any Dispute arising out of or related to these Terms is personal to you and us and will be resolved solely through individual arbitration and will not be brought as a class arbitration, class action or any other type of representative proceeding. There will be no class arbitration or arbitration in which an individual attempts to resolve a dispute as a representative of another individual or group of individuals. Further, a dispute cannot be brought as a class or other type of representative action, whether within or outside of arbitration, or on behalf of any other individual or group of individuals.
         </>}
